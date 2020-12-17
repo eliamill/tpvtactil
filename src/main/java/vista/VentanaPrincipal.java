@@ -25,6 +25,8 @@ import modelo.servicios.ProductoServicio;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
+    //prueba de comentario
+
     private ProductoServicio productoServicio = new ProductoServicio();
 
     /**
