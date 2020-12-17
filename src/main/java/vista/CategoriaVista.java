@@ -12,7 +12,7 @@ package vista;
 public class CategoriaVista extends javax.swing.JFrame {
 
     /**
-     * Creates new form Categoria
+     * Creates new form Categor ajsjjs
      */
     public CategoriaVista() {
         initComponents();
