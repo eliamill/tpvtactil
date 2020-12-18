@@ -552,11 +552,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuGestionTicketMouseClicked
 
     private void jBotonComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonComidasActionPerformed
-       try {
-            List<Producto> productos = productoServicio.getProductoByCategoria(1);
-            double numFilas = Math.ceil(productos.size() / 3.0);
-            Object[][] data = new Object[(int) numFilas][3];
-            int contador = 0;
+      
 
     }//GEN-LAST:event_jBotonComidasActionPerformed
 
