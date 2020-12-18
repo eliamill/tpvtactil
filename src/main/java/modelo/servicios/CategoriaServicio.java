@@ -43,4 +43,8 @@ public class CategoriaServicio {
         return categorias;
     }
 
+    public List<Categoria> getCategorias() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
