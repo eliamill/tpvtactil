@@ -558,28 +558,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             Object[][] data = new Object[(int) numFilas][3];
             int contador = 0;
 
-            for (int j = 0; j < numFilas; j++) {
-                for (int i = 0; i < 3; i++) {
-                    if (contador < productos.size()) {
-                        data[j][i] = createImage("imagenes/" + productos.get(contador).getImagen());
-                    }else{
-                        data[j][i] = "";
-                    }
-                    contador++;
-                }
-            }
-            DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"", "", ""}){
-              @Override
-              public Class getColumnClass(int column){
-                  return getValueAt(0, column).getClass();
-              }  
-            };
-            jTable2.setRowHeight(185);
-            jTable2.setModel(defaultTableModel);
-        }   catch (SQLException ex) {
-            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }//GEN-LAST:event_jBotonComidasActionPerformed
 
     private void jBotonAcceptarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAcceptarCompraActionPerformed
