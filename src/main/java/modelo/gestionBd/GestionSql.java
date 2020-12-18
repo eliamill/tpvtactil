@@ -15,9 +15,9 @@ import java.sql.SQLException;
  */
 public class GestionSql {
 
-    private String url ="jdbc:mysql://localhost/tpvTactil";
-    private String user = "fastfood";
-    private String password = "123456";
+    private String url ="jdbc:mysql://www.ired.es/eliaTPV?serverTimezone=Europe/Madrid";
+    private String user = "elia";
+    private String password = "Xjv6k74&";
     
     private static Connection conn;
 
@@ -28,7 +28,7 @@ public class GestionSql {
     public void openConnection() {
         
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(url,user,password);   
             System.out.println("Conexion realizada");
             
