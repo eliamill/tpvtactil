@@ -73,6 +73,11 @@ public class CategoriaVista extends javax.swing.JFrame {
         });
 
         jButtonBorrarCategoria.setText("Borrar");
+        jButtonBorrarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarCategoriaActionPerformed(evt);
+            }
+        });
 
         jTablePresentaCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -201,6 +206,22 @@ public class CategoriaVista extends javax.swing.JFrame {
         String nombre = (String) jTablePresentaCategorias.getModel().getValueAt(row, 1);
         jTextFieldNuevoNombreCategoria.setText(nombre);
     }//GEN-LAST:event_jTablePresentaCategoriasMouseClicked
+
+    private void jButtonBorrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarCategoriaActionPerformed
+        if (row != -1 && jTextFieldNuevoNombreCategoria.getText() != null && jTextFieldNuevoNombreCategoria.getText().length() > 0) {
+            try {
+                String nombre = (String) jTablePresentaCategorias.getModel().getValueAt(row, 1);
+                Categoria categoria = categoriaServicio.getCategoriaByNombre(nombre);
+                categoria.setNombre(jTextFieldNuevoNombreCategoria.getText());
+                categoriaServicio.gestionarCategoria(categoria, TipoGestion.BORRAR);
+                List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
+                cargarCategoriasEnTabla(categorias);
+            } catch (SQLException ex) {
+                Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_jButtonBorrarCategoriaActionPerformed
 
     /**
      * @param args the command line arguments

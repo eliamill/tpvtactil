@@ -47,7 +47,7 @@ public class CategoriaServicio {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Categoria getCategoriaByNombre(String nombre) {
+    public Categoria getCategoriaByNombre(String nombre) throws SQLException {
         return categoriaDao.getCategoriaByNombre(nombre);
     }
 
