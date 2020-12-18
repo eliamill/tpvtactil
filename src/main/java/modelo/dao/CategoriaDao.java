@@ -23,7 +23,7 @@ public class CategoriaDao {
     private Connection conn = GestionSql.getConn();
 
     public void insertarCategoria(Categoria categoria) throws SQLException {
-        String sql = "insert into categoria(nombre) values(?)";
+        String sql = "insert into Categoria(nombre) values(?)";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, categoria.getNombre());
         int row = pstm.executeUpdate();
@@ -31,7 +31,7 @@ public class CategoriaDao {
 
     public void modificarCategoria(Categoria categoria) throws SQLException {
 
-        String sql = "update categoria set nombre = ? where id = ?";
+        String sql = "update Categoria set nombre = ? where id = ?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -45,7 +45,7 @@ public class CategoriaDao {
 
     public void borrarCategoria(Categoria categoria) throws SQLException {
 
-        String sql = "delete from categoria where id = ?";
+        String sql = "delete from Categoria where id = ?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -56,7 +56,7 @@ public class CategoriaDao {
     }
 
     public Categoria consultarCategoria(int id) throws SQLException {
-        String sql = "select * from categoria where id = ?";
+        String sql = "select * from Categoria where id = ?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -76,7 +76,7 @@ public class CategoriaDao {
     }
 
     public List<Categoria> consultarCategorias() throws SQLException {
-       String sql = "select * from categoria";
+       String sql = "select * from Categoria";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 

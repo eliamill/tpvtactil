@@ -23,7 +23,7 @@ public class ProductoDao {
     private Connection conn = GestionSql.getConn();
     
     public void insertarProducto(Producto producto) throws SQLException {
-        String sql = "insert into producto(nombre) values(?)";
+        String sql = "insert into Producto(nombre) values(?)";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, producto.getNombre());
         int row = pstm.executeUpdate();
@@ -31,7 +31,7 @@ public class ProductoDao {
     
     public void modificarProducto(Producto producto) throws SQLException {
         
-        String sql = "update producto set nombre = ? where id = ?";
+        String sql = "update Producto set nombre = ? where id = ?";
         
         PreparedStatement pstm = conn.prepareStatement(sql);
         
@@ -45,7 +45,7 @@ public class ProductoDao {
     
     public void borrarProducto(Producto producto) throws SQLException {
         
-        String sql = "delete from producto where id = ?";
+        String sql = "delete from Producto where id = ?";
         
         PreparedStatement pstm = conn.prepareStatement(sql);
         
@@ -56,7 +56,7 @@ public class ProductoDao {
     }
     
     public Producto consultarProducto(int id) throws SQLException {
-        String sql = "select * from producto where id = ?";
+        String sql = "select * from Producto where id = ?";
         
         PreparedStatement pstm = conn.prepareStatement(sql);
         
@@ -76,7 +76,7 @@ public class ProductoDao {
     }
     
     public List<Producto> consultarProductos() throws SQLException {
-        String sql = "select * from producto";
+        String sql = "select * from Producto";
         
         PreparedStatement pstm = conn.prepareStatement(sql);
         
@@ -96,7 +96,7 @@ public class ProductoDao {
     }
     
     public List<Producto> consultarProductoByCategoria(int idCategoria) throws SQLException {
-        String sql = "select * from producto where idCategoria = ?";
+        String sql = "select * from Producto where idCategoria = ?";
         
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, idCategoria);

@@ -23,7 +23,7 @@ public class ClienteDao {
     private Connection conn = GestionSql.getConn();
 
     public void insertarCliente(Cliente cliente) throws SQLException {
-        String sql = "insert into cliente(nombre) values(?)";
+        String sql = "insert into Cliente(nombre) values(?)";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, cliente.getNombre());
         int row = pstm.executeUpdate();
@@ -31,7 +31,7 @@ public class ClienteDao {
 
     public void modificarCliente(Cliente cliente) throws SQLException {
 
-        String sql = "update cliente set nombre = ? where id = ?";
+        String sql = "update Cliente set nombre = ? where id = ?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -45,7 +45,7 @@ public class ClienteDao {
 
     public void borrarCliente(Cliente cliente) throws SQLException {
 
-        String sql = "delete from cliente where id = ?";
+        String sql = "delete from Cliente where id = ?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -56,7 +56,7 @@ public class ClienteDao {
     }
 
     public Cliente consultarCliente(int id) throws SQLException {
-        String sql = "select * from cliente where id = ?";
+        String sql = "select * from Cliente where id = ?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -76,7 +76,7 @@ public class ClienteDao {
     }
 
     public List<Cliente> consultarClientes() throws SQLException {
-        String sql = "select * from cliente";
+        String sql = "select * from Cliente";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
