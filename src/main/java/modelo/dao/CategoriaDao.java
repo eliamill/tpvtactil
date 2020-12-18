@@ -94,4 +94,23 @@ public class CategoriaDao {
         return retorno;
     }
 
+    public Categoria getCategoriaByNombre(String nombre) throws SQLException {
+        String sql = "select * from Categoria where nombre = ?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, nombre);
+        
+        ResultSet resultSet = pstm.executeQuery();
+        
+        if(resultSet.next()){
+            Categoria retorno = new Categoria();
+            retorno.setId(resultSet.getInt("id"));
+            retorno.setNombre(resultSet.getString("nombre"));
+            return retorno;
+        }
+        
+        return null;
+    }
+
 }

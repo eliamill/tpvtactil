@@ -5,9 +5,15 @@
  */
 package vista;
 
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelo.dao.beans.Categoria;
+import modelo.dao.beans.enums.TipoGestion;
+import modelo.gestionBd.GestionSql;
 import modelo.servicios.CategoriaServicio;
 
 /**
@@ -15,13 +21,24 @@ import modelo.servicios.CategoriaServicio;
  * @author brand
  */
 public class CategoriaVista extends javax.swing.JFrame {
- 
-    private CategoriaServicio categoriaServicio = new CategoriaServicio();
+
+    private CategoriaServicio categoriaServicio;
+    private int row = -1;
+
     /**
      * Creates new form Categoria
      */
     public CategoriaVista() {
         initComponents();
+        try {
+            GestionSql gestionSql = new GestionSql();
+            gestionSql.openConnection();
+            categoriaServicio = new CategoriaServicio();
+            List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
+            cargarCategoriasEnTabla(categorias);
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -39,12 +56,9 @@ public class CategoriaVista extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButtonModificar = new javax.swing.JButton();
         jButtonBorrarCategoria = new javax.swing.JButton();
-        jButtonConsultarCategoria = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePresentaCategorias = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextFieldNombreCategoria = new javax.swing.JTextField();
         jButtonInsertar = new javax.swing.JButton();
 
         jLabel1.setText("Seleccione Categoria a Modificar");
@@ -60,13 +74,6 @@ public class CategoriaVista extends javax.swing.JFrame {
 
         jButtonBorrarCategoria.setText("Borrar");
 
-        jButtonConsultarCategoria.setText("Consultar");
-        jButtonConsultarCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonConsultarCategoriaActionPerformed(evt);
-            }
-        });
-
         jTablePresentaCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -78,11 +85,14 @@ public class CategoriaVista extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTablePresentaCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablePresentaCategoriasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTablePresentaCategorias);
 
-        jLabel4.setText("Insertar Categoria");
-
-        jLabel5.setText("Nombre de la Categoria");
+        jLabel4.setText("Categorias");
 
         jButtonInsertar.setText("Insertar");
         jButtonInsertar.addActionListener(new java.awt.event.ActionListener() {
@@ -98,54 +108,40 @@ public class CategoriaVista extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(jTextFieldNombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButtonInsertar))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(9, 9, 9)
+                        .addComponent(jLabel4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldNuevoNombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
-                                .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43)
-                                .addComponent(jButtonBorrarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel4)
-                            .addComponent(jButtonConsultarCategoria))
-                        .addGap(0, 120, Short.MAX_VALUE))))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldNuevoNombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jButtonInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(jButtonBorrarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 188, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(45, 45, 45)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldNombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonInsertar)
-                .addGap(28, 28, 28)
-                .addComponent(jButtonConsultarCategoria)
-                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldNuevoNombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonInsertar)
                     .addComponent(jButtonModificar)
                     .addComponent(jButtonBorrarCategoria))
-                .addGap(198, 198, 198))
+                .addGap(43, 43, 43)
+                .addComponent(jLabel1)
+                .addContainerGap(278, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,30 +164,43 @@ public class CategoriaVista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
-        // TODO add your handling code here:
+        if (row != -1 && jTextFieldNuevoNombreCategoria.getText() != null && jTextFieldNuevoNombreCategoria.getText().length() > 0) {
+            try {
+                String nombre = (String) jTablePresentaCategorias.getModel().getValueAt(row, 1);
+                Categoria categoria = categoriaServicio.getCategoriaByNombre(nombre);
+                categoria.setNombre(jTextFieldNuevoNombreCategoria.getText());
+                categoriaServicio.gestionarCategoria(categoria, TipoGestion.MODIFICAR);
+                List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
+                cargarCategoriasEnTabla(categorias);
+            } catch (SQLException ex) {
+                Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }//GEN-LAST:event_jButtonModificarActionPerformed
 
     private void jButtonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarActionPerformed
-        // TODO add your handling code here:
+        String nombreCategoria = jTextFieldNuevoNombreCategoria.getText();
+        if (nombreCategoria != null && nombreCategoria.length() > 0) {
+            try {
+                Categoria categoria = new Categoria();
+                categoria.setNombre(nombreCategoria);
+                categoriaServicio.gestionarCategoria(categoria, TipoGestion.INSERTAR);
+                List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
+                cargarCategoriasEnTabla(categorias);
+            } catch (SQLException ex) {
+                Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }//GEN-LAST:event_jButtonInsertarActionPerformed
 
-    private void jButtonConsultarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConsultarCategoriaActionPerformed
-    
-            List<Categoria> categorias = categoriaServicio.getCategorias(); 
-            double numFilas = Math.ceil(categorias.size() / 3.0);
-            Object[][] data = new Object[(int) numFilas][3];
-            int contador = 0;
-
-            
-            DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"", "", ""}){
-              @Override
-              public Class getColumnClass(int column){
-                  return getValueAt(0, column).getClass();
-              }       
-            }; 
-            jTablePresentaCategorias.setRowHeight(185);
-            jTablePresentaCategorias.setModel(defaultTableModel);
-    }//GEN-LAST:event_jButtonConsultarCategoriaActionPerformed
+    private void jTablePresentaCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePresentaCategoriasMouseClicked
+        JTable source = (JTable) evt.getSource();
+        row = source.rowAtPoint(evt.getPoint());
+        String nombre = (String) jTablePresentaCategorias.getModel().getValueAt(row, 1);
+        jTextFieldNuevoNombreCategoria.setText(nombre);
+    }//GEN-LAST:event_jTablePresentaCategoriasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -231,17 +240,39 @@ public class CategoriaVista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBorrarCategoria;
-    private javax.swing.JButton jButtonConsultarCategoria;
     private javax.swing.JButton jButtonInsertar;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePresentaCategorias;
-    private javax.swing.JTextField jTextFieldNombreCategoria;
     private javax.swing.JTextField jTextFieldNuevoNombreCategoria;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarCategoriasEnTabla(List<Categoria> categorias) {
+
+        Object[][] data = new Object[(int) categorias.size()][2];
+
+        for (int j = 0; j < categorias.size(); j++) {
+            Categoria categoria = categorias.get(j);
+            for (int i = 0; i < 2; i++) {
+                if (i == 0) {
+                    data[j][i] = categoria.getId();
+                } else {
+                    data[j][i] = categoria.getNombre();
+                }
+            }
+        }
+
+        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id Categoria", "Nombre Categoria"}) {
+            @Override
+            public Class getColumnClass(int column) {
+                return getValueAt(0, column).getClass();
+            }
+        };
+        jTablePresentaCategorias.setModel(defaultTableModel);
+
+    }
 }

@@ -15,10 +15,10 @@ import java.sql.SQLException;
  */
 public class GestionSql {
 
-    private String url ="jdbc:mysql://www.ired.es/eliaTPV?serverTimezone=Europe/Madrid";
+    private String url = "jdbc:mysql://www.ired.es/eliaTPV?serverTimezone=Europe/Madrid";
     private String user = "elia";
     private String password = "Xjv6k74&";
-    
+
     private static Connection conn;
 
     public static Connection getConn() {
@@ -26,25 +26,24 @@ public class GestionSql {
     }
 
     public void openConnection() {
-        
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(url,user,password);   
-            System.out.println("Conexion realizada");
-            
-            
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (conn == null) {
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                conn = DriverManager.getConnection(url, user, password);
+                System.out.println("Conexion realizada");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        
-        
+
     }
 
-    public void closeConnection() throws SQLException{
+    public void closeConnection() throws SQLException {
         conn.close();
     }
-    
-    public void executeSql(String nombreProcedimientoAlmacenado){
-        
+
+    public void executeSql(String nombreProcedimientoAlmacenado) {
+
     }
 }
