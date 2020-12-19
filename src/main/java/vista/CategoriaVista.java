@@ -61,6 +61,8 @@ public class CategoriaVista extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButtonInsertar = new javax.swing.JButton();
 
+        setTitle("Gestion de Categorias");
+
         jLabel1.setText("Seleccione Categoria a Modificar");
 
         jLabel3.setText("Nombre de la Categoria");

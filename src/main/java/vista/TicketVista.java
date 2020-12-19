@@ -59,6 +59,8 @@ private TicketServicio ticketServicio;
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePresentaTickets = new javax.swing.JTable();
 
+        setTitle("Gestion Ticket");
+
         jLabel1.setText("Seleccione Ticket");
 
         jLabel3.setText("Nombre/Empresa");

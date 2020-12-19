@@ -65,6 +65,8 @@ public class ClientesVista extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePresentaClientes = new javax.swing.JTable();
 
+        setTitle("Gestion Clientes");
+
         jLabelSeleccioneCliente.setText("Seleccione Cliente");
 
         jLabelNombreCliente.setText("Nombre/Empresa");
