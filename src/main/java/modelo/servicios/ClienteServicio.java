@@ -41,4 +41,8 @@ public class ClienteServicio {
         }
         return clientes;
     }
+
+    public Cliente getClienteByNombre(String nombre) throws SQLException {
+       return clienteDao.getCategoriaByNombre(nombre);
+    }
 }
