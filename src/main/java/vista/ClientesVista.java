@@ -24,22 +24,23 @@ import modelo.servicios.ClienteServicio;
  */
 public class ClientesVista extends javax.swing.JFrame {
     private ClienteServicio clienteServicio;
-    private int row = -1;
+    private List<Cliente> clientes = null;
     /**
      * Creates new form Clientes
      */
     public ClientesVista() {
         initComponents();
+        
         try {
             GestionSql gestionSql = new GestionSql();
             gestionSql.openConnection();
             clienteServicio = new ClienteServicio();
-            List<Cliente>clientes = clienteServicio.gestionarCliente(null, TipoGestion.LISTAR);
-            cargarClientesEnTabla(clientes);
-        } catch (SQLException ex) {
-            Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
+            clientes = clienteServicio.gestionarCliente(null, TipoGestion.LISTAR);
+            cargarClientesEnTabla();
+                    
+                    } catch (SQLException ex) {
+            Logger.getLogger(ClientesVista.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         
     }
 
@@ -233,10 +234,11 @@ public class ClientesVista extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
    
-    private void cargarClientesEnTabla(List<Cliente> clientes) {
+
+    private void cargarClientesEnTabla() {
         
-        Object[][] data = new Object[(int) clientes.size()][2];
-       
+       Object[][] data = new Object[(int) clientes.size()][2];
+      
         for (int j = 0; j < clientes.size(); j++) {
             Cliente cliente = clientes.get(j);
             for (int i = 0; i < 2; i++) {
@@ -247,7 +249,6 @@ public class ClientesVista extends javax.swing.JFrame {
                 }
             }
         }
-
         DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id Cliente", "Nombre Cliente"}) {
             @Override
             public Class getColumnClass(int column) {
@@ -255,5 +256,6 @@ public class ClientesVista extends javax.swing.JFrame {
             }
         };
         jTablePresentaClientes.setModel(defaultTableModel);
+       
     }
 }
