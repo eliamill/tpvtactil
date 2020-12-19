@@ -61,6 +61,8 @@ public class ProductoVista extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jTextField4 = new javax.swing.JTextField();
 
+        setTitle("Gestion Producto");
+
         jLabel1.setText("Seleccione Producto");
 
         jLabel3.setText("Nombre del Producto");
