@@ -29,6 +29,10 @@ public class Cliente {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public Object getDni() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

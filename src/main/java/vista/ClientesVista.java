@@ -5,17 +5,42 @@
  */
 package vista;
 
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+        
+import javax.swing.table.DefaultTableModel;
+
+import modelo.dao.beans.Cliente;
+import modelo.dao.beans.enums.TipoGestion;
+import modelo.gestionBd.GestionSql;
+import modelo.servicios.ClienteServicio;
+
 /**
  *
  * @author brand
  */
 public class ClientesVista extends javax.swing.JFrame {
-
+    private ClienteServicio clienteServicio;
+    private int row = -1;
     /**
      * Creates new form Clientes
      */
     public ClientesVista() {
         initComponents();
+        try {
+            GestionSql gestionSql = new GestionSql();
+            gestionSql.openConnection();
+            clienteServicio = new ClienteServicio();
+            List<Cliente>clientes = clienteServicio.gestionarCliente(null, TipoGestion.LISTAR);
+            cargarClientesEnTabla(clientes);
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }
 
     /**
@@ -28,46 +53,46 @@ public class ClientesVista extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jLabelSeleccioneCliente = new javax.swing.JLabel();
+        jTextFieldNombreCliente = new javax.swing.JTextField();
+        jLabelNombreCliente = new javax.swing.JLabel();
+        jLabelDni = new javax.swing.JLabel();
+        jTextFieldDni = new javax.swing.JTextField();
+        jButtonModificarCliente = new javax.swing.JButton();
+        jBorrarCliente = new javax.swing.JButton();
+        jButtonInsertarCliente = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTablePresentaClientes = new javax.swing.JTable();
 
-        jLabel1.setText("Seleccione Cliente");
+        jLabelSeleccioneCliente.setText("Seleccione Cliente");
 
-        jLabel3.setText("Nombre/Empresa");
+        jLabelNombreCliente.setText("Nombre/Empresa");
 
-        jLabel4.setText("DNI");
+        jLabelDni.setText("DNI");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldDni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                jTextFieldDniActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Modificar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModificarCliente.setText("Modificar");
+        jButtonModificarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonModificarClienteActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Borrar");
+        jBorrarCliente.setText("Borrar");
 
-        jButton3.setText("Insertar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonInsertarCliente.setText("Insertar");
+        jButtonInsertarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonInsertarClienteActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTablePresentaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -78,7 +103,7 @@ public class ClientesVista extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTablePresentaClientes);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,43 +111,43 @@ public class ClientesVista extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
+                .addComponent(jLabelNombreCliente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
+                .addComponent(jLabelDni)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldDni, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonInsertarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonModificarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBorrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(122, 122, 122))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelSeleccioneCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1)
+                .addComponent(jLabelSeleccioneCliente)
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonInsertarCliente)
+                    .addComponent(jButtonModificarCliente)
+                    .addComponent(jBorrarCliente)
+                    .addComponent(jTextFieldNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNombreCliente)
+                    .addComponent(jLabelDni)
+                    .addComponent(jTextFieldDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(217, Short.MAX_VALUE))
         );
 
@@ -145,17 +170,17 @@ public class ClientesVista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void jTextFieldDniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDniActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_jTextFieldDniActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonModificarClienteActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonInsertarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonInsertarClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,16 +219,41 @@ public class ClientesVista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton jBorrarCliente;
+    private javax.swing.JButton jButtonInsertarCliente;
+    private javax.swing.JButton jButtonModificarCliente;
+    private javax.swing.JLabel jLabelDni;
+    private javax.swing.JLabel jLabelNombreCliente;
+    private javax.swing.JLabel jLabelSeleccioneCliente;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable jTablePresentaClientes;
+    private javax.swing.JTextField jTextFieldDni;
+    private javax.swing.JTextField jTextFieldNombreCliente;
     // End of variables declaration//GEN-END:variables
+
+   
+    private void cargarClientesEnTabla(List<Cliente> clientes) {
+        
+        Object[][] data = new Object[(int) clientes.size()][2];
+       
+        for (int j = 0; j < clientes.size(); j++) {
+            Cliente cliente = clientes.get(j);
+            for (int i = 0; i < 2; i++) {
+                if (i == 0) {
+                    data[j][i] = cliente.getId();
+                } else {
+                    data[j][i] = cliente.getNombre();
+                }
+            }
+        }
+
+        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id Cliente", "Nombre Cliente"}) {
+            @Override
+            public Class getColumnClass(int column) {
+                return getValueAt(0, column).getClass();
+            }
+        };
+        jTablePresentaClientes.setModel(defaultTableModel);
+    }
 }

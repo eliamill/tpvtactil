@@ -34,7 +34,7 @@ public class CategoriaVista extends javax.swing.JFrame {
             GestionSql gestionSql = new GestionSql();
             gestionSql.openConnection();
             categoriaServicio = new CategoriaServicio();
-            List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
+            List<Categoria>categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
             cargarCategoriasEnTabla(categorias);
         } catch (SQLException ex) {
             Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
