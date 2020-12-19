@@ -14,6 +14,8 @@ public class Producto {
     private int id;
     private String nombre;
     private String imagen;
+    private int idCategoria;
+    private int cantidad;
 
     public String getImagen() {
         return imagen;
