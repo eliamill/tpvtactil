@@ -96,4 +96,23 @@ public class ClienteDao {
         return retorno;
 
     }
+
+    public Cliente getCategoriaByNombre(String nombre) throws SQLException {
+        String sql = "select * from Cliente where nombre = ?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, nombre);
+        
+        ResultSet resultSet = pstm.executeQuery();
+        
+        if(resultSet.next()){
+            Cliente retorno = new Cliente();
+            retorno.setId(resultSet.getInt("id"));
+            retorno.setNombre(resultSet.getString("nombre"));
+            return retorno;
+        }
+        
+        return null;
+    }
 }

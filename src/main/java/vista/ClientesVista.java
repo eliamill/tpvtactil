@@ -24,6 +24,7 @@ import modelo.servicios.ClienteServicio;
  */
 public class ClientesVista extends javax.swing.JFrame {
     private ClienteServicio clienteServicio;
+    private int row = -1;
   
     /**
      * Creates new form Clientes
@@ -176,7 +177,19 @@ public class ClientesVista extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldDniActionPerformed
 
     private void jButtonModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarClienteActionPerformed
-        // TODO add your handling code here:
+     if (row != -1 && jTextFieldNombreCliente.getText() != null && jTextFieldNombreCliente.getText().length() > 0) {
+            try {
+                String nombre = (String) jTablePresentaClientes.getModel().getValueAt(row, 1);
+                Cliente cliente = clienteServicio.getClienteByNombre(nombre);
+                cliente.setNombre(jTextFieldNombreCliente.getText());
+                clienteServicio.gestionarCliente(cliente, TipoGestion.MODIFICAR);
+                List<Cliente> clientes = clienteServicio.gestionarCliente(null, TipoGestion.LISTAR);
+                cargarClientesEnTabla(clientes);
+            } catch (SQLException ex) {
+                Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }  
     }//GEN-LAST:event_jButtonModificarClienteActionPerformed
 
     private void jButtonInsertarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarClienteActionPerformed
