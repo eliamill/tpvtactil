@@ -89,6 +89,7 @@ public class ProductoDao {
             producto.setId(resultSet.getInt("id"));
             producto.setNombre(resultSet.getString("nombre"));
             producto.setIdCategoria(resultSet.getInt("idCategoria"));
+           // producto.setCantidad(resultSet.getInt("cantidad"));
             retorno.add(producto);
         }
         

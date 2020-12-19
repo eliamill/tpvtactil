@@ -21,6 +21,7 @@ import modelo.servicios.ProductoServicio;
  */
 public class ProductoVista extends javax.swing.JFrame {
     private ProductoServicio productoServicio;
+  
     /**
      * Creates new form Producto
      */
@@ -248,29 +249,32 @@ public class ProductoVista extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarProductosEnTabla(List<Producto> productos) {
-        Object[][] data = new Object[(int) productos.size()][3];
+     Object[][] data = new Object[(int) productos.size()][4];
 
         for (int j = 0; j < productos.size(); j++) {
             Producto producto = productos.get(j);
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 4; i++) {
                 if (i == 0) {
                     data[j][i] = producto.getId();
-                } else if (i==1) {
+                   
+                } else if (i==1){
                     data[j][i] = producto.getIdCategoria();
-                }else{
-                        data[j][i] = producto.getNombre();
-                        
-                        }
+                }else {
+                    data[j][i] = producto.getNombre();
+                }
             }
         }
 
-        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id Producto", "Nombre Producto"}) {
+        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id Producto", "Categoria","Producto"}) {
             @Override
             public Class getColumnClass(int column) {
                 return getValueAt(0, column).getClass();
             }
         };
-        jTablePresentaProductos.setModel(defaultTableModel);
+        jTablePresentaProductos.setModel(defaultTableModel);    
+       
+}
+
         
     }
-}
+

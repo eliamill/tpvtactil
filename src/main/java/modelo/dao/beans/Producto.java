@@ -12,6 +12,19 @@ package modelo.dao.beans;
 public class Producto {
 
     private int id;
+    private String nombre;
+    private String imagen;
+    private int idCategoria;
+    private int cantidad;
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
 
     public int getIdCategoria() {
         return idCategoria;
@@ -21,17 +34,8 @@ public class Producto {
         this.idCategoria = idCategoria;
     }
 
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-    private String nombre;
-    private String imagen;
-    private int idCategoria;
-    private int cantidad;
+   
+    
 
     public String getImagen() {
         return imagen;
