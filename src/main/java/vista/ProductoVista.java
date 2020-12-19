@@ -248,16 +248,19 @@ public class ProductoVista extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void cargarProductosEnTabla(List<Producto> productos) {
-        Object[][] data = new Object[(int) productos.size()][2];
+        Object[][] data = new Object[(int) productos.size()][3];
 
         for (int j = 0; j < productos.size(); j++) {
             Producto producto = productos.get(j);
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 3; i++) {
                 if (i == 0) {
                     data[j][i] = producto.getId();
-                } else {
-                    data[j][i] = producto.getNombre();
-                }
+                } else if (i==1) {
+                    data[j][i] = producto.getIdCategoria();
+                }else{
+                        data[j][i] = producto.getNombre();
+                        
+                        }
             }
         }
 
