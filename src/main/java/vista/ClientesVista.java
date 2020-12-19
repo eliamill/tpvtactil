@@ -24,7 +24,7 @@ import modelo.servicios.ClienteServicio;
  */
 public class ClientesVista extends javax.swing.JFrame {
     private ClienteServicio clienteServicio;
-    private List<Cliente> clientes = null;
+  
     /**
      * Creates new form Clientes
      */
@@ -35,8 +35,8 @@ public class ClientesVista extends javax.swing.JFrame {
             GestionSql gestionSql = new GestionSql();
             gestionSql.openConnection();
             clienteServicio = new ClienteServicio();
-            clientes = clienteServicio.gestionarCliente(null, TipoGestion.LISTAR);
-            cargarClientesEnTabla();
+             List<Cliente>clientes = clienteServicio.gestionarCliente(null, TipoGestion.LISTAR);
+            cargarClientesEnTabla(clientes);
                     
                     } catch (SQLException ex) {
             Logger.getLogger(ClientesVista.class.getName()).log(Level.SEVERE, null, ex);
@@ -235,7 +235,7 @@ public class ClientesVista extends javax.swing.JFrame {
 
    
 
-    private void cargarClientesEnTabla() {
+    private void cargarClientesEnTabla(List<Cliente> clientes) {
         
        Object[][] data = new Object[(int) clientes.size()][2];
       

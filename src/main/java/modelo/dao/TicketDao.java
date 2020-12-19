@@ -88,7 +88,8 @@ public class TicketDao {
         while (resultSet.next()) {
             Ticket ticket = new Ticket();
             ticket.setId(resultSet.getInt("id"));
-            ticket.setTotal(resultSet.getInt("total"));
+            ticket.setId(resultSet.getInt("idCliente"));
+            //ticket.setTotal(resultSet.getInt("total"));
             retorno.add(ticket);
         }
 

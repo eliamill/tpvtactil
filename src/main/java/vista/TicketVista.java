@@ -5,17 +5,38 @@
  */
 package vista;
 
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import modelo.dao.beans.Ticket;
+import modelo.dao.beans.enums.TipoGestion;
+import modelo.gestionBd.GestionSql;
+import modelo.servicios.TicketServicio;
+
 /**
  *
  * @author brand
  */
 public class TicketVista extends javax.swing.JFrame {
-
+private TicketServicio ticketServicio;
     /**
      * Creates new form ticket
      */
     public TicketVista() {
         initComponents();
+        try {
+            GestionSql gestionSql = new GestionSql();
+            gestionSql.openConnection();
+            ticketServicio = new TicketServicio();
+            List<Ticket>tickets = ticketServicio.gestionarTicket(null, TipoGestion.LISTAR);
+            cargarTicketsEnTabla(tickets);
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
     }
 
     /**
@@ -36,7 +57,7 @@ public class TicketVista extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTablePresentaTickets = new javax.swing.JTable();
 
         jLabel1.setText("Seleccione Ticket");
 
@@ -59,7 +80,7 @@ public class TicketVista extends javax.swing.JFrame {
 
         jButton2.setText("Borrar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTablePresentaTickets.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -70,7 +91,7 @@ public class TicketVista extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTablePresentaTickets);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -193,8 +214,34 @@ public class TicketVista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTablePresentaTickets;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarTicketsEnTabla(List<Ticket> tickets) {
+     
+        Object[][] data = new Object[(int) tickets.size()][2];
+
+        for (int j = 0; j < tickets.size(); j++) {
+            Ticket ticket = tickets.get(j);
+            for (int i = 0; i < 2; i++) {
+                if (i == 0) {
+                    data[j][i] = ticket.getId();
+                } else if (i==1){
+                    data[j][i] = ticket.getIdCliente();
+                }else {
+                    data[j][i] = ticket.getTotal();
+                }
+            }
+        }
+
+        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id ticket", "Id cliente","Total"}) {
+            @Override
+            public Class getColumnClass(int column) {
+                return getValueAt(0, column).getClass();
+            }
+        };
+        jTablePresentaTickets.setModel(defaultTableModel);  
+    }
 }
