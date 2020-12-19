@@ -51,9 +51,7 @@
                   <Component id="jLabelDni" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jTextFieldDni" min="-2" pref="101" max="-2" attributes="0"/>
-                  <EmptySpace pref="24" max="32767" attributes="0"/>
-                  <Component id="jButtonInsertarCliente" min="-2" pref="82" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace pref="124" max="32767" attributes="0"/>
                   <Component id="jButtonModificarCliente" min="-2" pref="82" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jBorrarCliente" min="-2" pref="82" max="-2" attributes="0"/>
@@ -78,7 +76,6 @@
                   <Component id="jScrollPane1" min="-2" pref="103" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButtonInsertarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonModificarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBorrarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldNombreCliente" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -126,13 +123,8 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Borrar"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButtonInsertarCliente">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Insertar"/>
-          </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonInsertarClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBorrarClienteActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -153,6 +145,9 @@
                   </Table>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTablePresentaClientesMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
