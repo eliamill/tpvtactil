@@ -34,7 +34,7 @@ public class CategoriaVista extends javax.swing.JFrame {
             GestionSql gestionSql = new GestionSql();
             gestionSql.openConnection();
             categoriaServicio = new CategoriaServicio();
-            List<Categoria>categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
+            List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
             cargarCategoriasEnTabla(categorias);
         } catch (SQLException ex) {
             Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,10 +60,11 @@ public class CategoriaVista extends javax.swing.JFrame {
         jTablePresentaCategorias = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jButtonInsertar = new javax.swing.JButton();
+        jLabelcategoriaModificandose = new javax.swing.JLabel();
 
         setTitle("Gestion de Categorias");
 
-        jLabel1.setText("Seleccione Categoria a Modificar");
+        jLabel1.setText("Fila modificandose");
 
         jLabel3.setText("Nombre de la Categoria");
 
@@ -92,6 +93,11 @@ public class CategoriaVista extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTablePresentaCategorias.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTablePresentaCategoriasFocusLost(evt);
+            }
+        });
         jTablePresentaCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTablePresentaCategoriasMouseClicked(evt);
@@ -115,22 +121,27 @@ public class CategoriaVista extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jLabel4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNuevoNombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelcategoriaModificandose, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldNuevoNombreCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(26, 26, 26)
                         .addComponent(jButtonInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
                         .addComponent(jButtonBorrarCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 188, Short.MAX_VALUE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,9 +158,13 @@ public class CategoriaVista extends javax.swing.JFrame {
                     .addComponent(jButtonModificar)
                     .addComponent(jButtonBorrarCategoria))
                 .addGap(43, 43, 43)
-                .addComponent(jLabel1)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabelcategoriaModificandose, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabelcategoriaModificandose.getAccessibleContext().setAccessibleName("categoríaModificandose");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,25 +220,30 @@ public class CategoriaVista extends javax.swing.JFrame {
     private void jTablePresentaCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePresentaCategoriasMouseClicked
         JTable source = (JTable) evt.getSource();
         row = source.rowAtPoint(evt.getPoint());
-        String nombre = (String) jTablePresentaCategorias.getModel().getValueAt(row, 1);
+        String nombre = (String) jTablePresentaCategorias.getModel().getValueAt(row, 2);
         jTextFieldNuevoNombreCategoria.setText(nombre);
+        jLabelcategoriaModificandose.setText(String.valueOf(row + 1));
     }//GEN-LAST:event_jTablePresentaCategoriasMouseClicked
 
     private void jButtonBorrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarCategoriaActionPerformed
         if (row != -1 && jTextFieldNuevoNombreCategoria.getText() != null && jTextFieldNuevoNombreCategoria.getText().length() > 0) {
             try {
-                String nombre = (String) jTablePresentaCategorias.getModel().getValueAt(row, 1);
-                Categoria categoria = categoriaServicio.getCategoriaByNombre(nombre);
-                categoria.setNombre(jTextFieldNuevoNombreCategoria.getText());
-                categoriaServicio.gestionarCategoria(categoria, TipoGestion.BORRAR);
-                List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.BORRAR);
-                cargarCategoriasEnTabla(categorias);
+                Categoria categoria = categoriaServicio.getCategoriaByNombre(jTextFieldNuevoNombreCategoria.getText());
+                if (categoria != null) {
+                    categoriaServicio.gestionarCategoria(categoria, TipoGestion.BORRAR);
+                    List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
+                    cargarCategoriasEnTabla(categorias);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
     }//GEN-LAST:event_jButtonBorrarCategoriaActionPerformed
+
+    private void jTablePresentaCategoriasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTablePresentaCategoriasFocusLost
+
+    }//GEN-LAST:event_jTablePresentaCategoriasFocusLost
 
     /**
      * @param args the command line arguments
@@ -268,6 +288,7 @@ public class CategoriaVista extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelcategoriaModificandose;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePresentaCategorias;
@@ -276,20 +297,23 @@ public class CategoriaVista extends javax.swing.JFrame {
 
     private void cargarCategoriasEnTabla(List<Categoria> categorias) {
 
-        Object[][] data = new Object[(int) categorias.size()][2];
-
+        Object[][] data = new Object[(int) categorias.size()][3];
+        int contador = 1;
         for (int j = 0; j < categorias.size(); j++) {
             Categoria categoria = categorias.get(j);
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 3; i++) {
                 if (i == 0) {
+                    data[j][i] = contador;
+                } else if (i == 1) {
                     data[j][i] = categoria.getId();
                 } else {
                     data[j][i] = categoria.getNombre();
                 }
             }
+            contador++;
         }
 
-        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id Categoria", "Nombre Categoria"}) {
+        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"#", "Id Categoria", "Nombre Categoria"}) {
             @Override
             public Class getColumnClass(int column) {
                 return getValueAt(0, column).getClass();
