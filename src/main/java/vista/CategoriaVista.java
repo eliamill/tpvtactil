@@ -217,6 +217,7 @@ public class CategoriaVista extends javax.swing.JFrame {
                 categoriaServicio.gestionarCategoria(categoria, TipoGestion.BORRAR);
                 List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
                 cargarCategoriasEnTabla(categorias);
+                
             } catch (SQLException ex) {
                 Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
             }
