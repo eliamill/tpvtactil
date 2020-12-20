@@ -5,7 +5,6 @@
  */
 package vista;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -81,6 +80,11 @@ public class ProductoVista extends javax.swing.JFrame {
         });
 
         jButtonBorrarProducto.setText("Borrar");
+        jButtonBorrarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBorrarProductoActionPerformed(evt);
+            }
+        });
 
         jTablePresentaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -185,7 +189,19 @@ public class ProductoVista extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldProductoActionPerformed
 
     private void jButtonModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarProductoActionPerformed
-        // TODO add your handling code here:
+        if (row != -1 && jTextFieldProducto.getText() != null && jTextFieldProducto.getText().length() > 0) {
+            try {
+                String nombre = (String) jTablePresentaProductos.getModel().getValueAt(row, 1);
+                Producto producto = productoServicio.getProductoByNombre(nombre);
+                producto.setNombre(jTextFieldProducto.getText());
+                productoServicio.gestionarProducto(producto, TipoGestion.MODIFICAR);
+                List<Producto> productos = productoServicio.gestionarProducto(null, TipoGestion.LISTAR);
+                cargarProductosEnTabla(productos);
+            } catch (SQLException ex) {
+                Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
     }//GEN-LAST:event_jButtonModificarProductoActionPerformed
 
     private void jButtonInsertarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarProductoActionPerformed
@@ -200,20 +216,35 @@ public class ProductoVista extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+//Condicion para cambiar ID
         }
     }//GEN-LAST:event_jButtonInsertarProductoActionPerformed
 
     private void jTablePresentaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePresentaProductosMouseClicked
         JTable source = (JTable) evt.getSource();
         row = source.rowAtPoint(evt.getPoint());
-        String nombre = (String) jTablePresentaProductos.getModel().getValueAt(row,2 );
+        String nombre = (String) jTablePresentaProductos.getModel().getValueAt(row, 2);
         jTextFieldProducto.setText(nombre);
-        int idCategoria = (int) jTablePresentaProductos.getModel().getValueAt(row,1 );
+        int idCategoria = (int) jTablePresentaProductos.getModel().getValueAt(row, 1);
         jTextFieldIdCategoria.setText(Integer.toString(idCategoria));
-        
-      //QUE HACER PARA OBTENER VALOR DE ID
+
+
     }//GEN-LAST:event_jTablePresentaProductosMouseClicked
+
+    private void jButtonBorrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarProductoActionPerformed
+      if (row != -1 && jTextFieldProducto.getText() != null && jTextFieldProducto.getText().length() > 0) {
+            try {
+                String nombre = (String) jTablePresentaProductos.getModel().getValueAt(row, 1);
+                Producto producto = productoServicio.getProductoByNombre(nombre);
+                productoServicio.gestionarProducto(producto, TipoGestion.BORRAR);
+                List<Producto> productos = productoServicio.gestionarProducto(null, TipoGestion.BORRAR);
+                cargarProductosEnTabla(productos);
+            } catch (SQLException ex) {
+                Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_jButtonBorrarProductoActionPerformed
 
     /**
      * @param args the command line arguments

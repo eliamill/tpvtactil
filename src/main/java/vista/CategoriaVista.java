@@ -34,7 +34,7 @@ public class CategoriaVista extends javax.swing.JFrame {
             GestionSql gestionSql = new GestionSql();
             gestionSql.openConnection();
             categoriaServicio = new CategoriaServicio();
-            List<Categoria>categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
+            List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
             cargarCategoriasEnTabla(categorias);
         } catch (SQLException ex) {
             Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
@@ -214,9 +214,8 @@ public class CategoriaVista extends javax.swing.JFrame {
             try {
                 String nombre = (String) jTablePresentaCategorias.getModel().getValueAt(row, 1);
                 Categoria categoria = categoriaServicio.getCategoriaByNombre(nombre);
-                categoria.setNombre(jTextFieldNuevoNombreCategoria.getText());
                 categoriaServicio.gestionarCategoria(categoria, TipoGestion.BORRAR);
-                List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.BORRAR);
+                List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
                 cargarCategoriasEnTabla(categorias);
             } catch (SQLException ex) {
                 Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);

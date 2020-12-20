@@ -17,7 +17,8 @@ import modelo.dao.beans.enums.TipoGestion;
  * @author brand
  */
 public class ProductoServicio {
-   private ProductoDao productoDao = new ProductoDao();
+
+    private ProductoDao productoDao = new ProductoDao();
 
     public List<Producto> gestionarProducto(Producto producto, TipoGestion tipoGestion) throws SQLException {
         List<Producto> productos = new ArrayList<>();
@@ -41,8 +42,12 @@ public class ProductoServicio {
         }
         return productos;
     }
-    
-    public List<Producto> getProductoByCategoria(int idCategoria) throws SQLException{
+
+    public List<Producto> getProductoByCategoria(int idCategoria) throws SQLException {
         return productoDao.consultarProductoByCategoria(idCategoria);
+    }
+
+    public Producto getProductoByNombre(String nombre) throws SQLException {
+        return productoDao.getCategoriaByNombre(nombre);
     }
 }
