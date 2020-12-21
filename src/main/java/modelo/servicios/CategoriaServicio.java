@@ -31,6 +31,7 @@ public class CategoriaServicio {
                 break;
             case BORRAR:
                 categoriaDao.borrarCategoria(categoria);
+                break;
             case CONSULTAR:
                 Categoria categoriaTmp = categoriaDao.consultarCategoria(categoria.getId());
                 if (categoriaTmp != null) {
