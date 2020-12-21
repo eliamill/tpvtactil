@@ -228,12 +228,12 @@ public class CategoriaVista extends javax.swing.JFrame {
     private void jButtonBorrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarCategoriaActionPerformed
         if (row != -1 && jTextFieldNuevoNombreCategoria.getText() != null && jTextFieldNuevoNombreCategoria.getText().length() > 0) {
             try {
-                Categoria categoria = categoriaServicio.getCategoriaByNombre(jTextFieldNuevoNombreCategoria.getText());
-                if (categoria != null) {
-                    categoriaServicio.gestionarCategoria(categoria, TipoGestion.BORRAR);
-                    List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
-                    cargarCategoriasEnTabla(categorias);
-                }
+                String nombre = (String) jTablePresentaCategorias.getModel().getValueAt(row, 1);
+                Categoria categoria = categoriaServicio.getCategoriaByNombre(nombre);
+                categoriaServicio.gestionarCategoria(categoria, TipoGestion.BORRAR);
+                List<Categoria> categorias = categoriaServicio.gestionarCategoria(null, TipoGestion.LISTAR);
+                cargarCategoriasEnTabla(categorias);
+                
             } catch (SQLException ex) {
                 Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
             }

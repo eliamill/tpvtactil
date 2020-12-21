@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
-        
 import javax.swing.table.DefaultTableModel;
-
 import modelo.dao.beans.Cliente;
 import modelo.dao.beans.enums.TipoGestion;
 import modelo.gestionBd.GestionSql;
@@ -37,7 +35,7 @@ public class ClientesVista extends javax.swing.JFrame {
             gestionSql.openConnection();
             clienteServicio = new ClienteServicio();
              List<Cliente>clientes = clienteServicio.gestionarCliente(null, TipoGestion.LISTAR);
-            cargarClientesEnTabla(clientes);
+             cargarClientesEnTabla(clientes);
                     
                     } catch (SQLException ex) {
             Logger.getLogger(ClientesVista.class.getName()).log(Level.SEVERE, null, ex);
@@ -194,7 +192,7 @@ public class ClientesVista extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonModificarClienteActionPerformed
 
     private void jTablePresentaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePresentaClientesMouseClicked
-     JTable source = (JTable) evt.getSource();
+       JTable source = (JTable) evt.getSource();
         row = source.rowAtPoint(evt.getPoint());
         String nombre = (String) jTablePresentaClientes.getModel().getValueAt(row, 1);
         jTextFieldNombreCliente.setText(nombre);
@@ -281,7 +279,7 @@ public class ClientesVista extends javax.swing.JFrame {
                 }
             }
         }
-        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id Cliente", "Nombre Cliente"}) {
+        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id Cliente", "Cliente"}) {
             @Override
             public Class getColumnClass(int column) {
                 return getValueAt(0, column).getClass();
