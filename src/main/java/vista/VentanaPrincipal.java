@@ -58,8 +58,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabelEmpresa = new javax.swing.JLabel();
         jLabelVendedor = new javax.swing.JLabel();
-        jLabelNombre = new javax.swing.JLabel();
-        jLabelDniCif = new javax.swing.JLabel();
         jLabelTotal = new javax.swing.JLabel();
         jTextTotal = new javax.swing.JTextField();
         jBoton7 = new javax.swing.JButton();
@@ -78,8 +76,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jBotonBebidas = new javax.swing.JButton();
         jBotonComidas = new javax.swing.JButton();
         jLabelProductosYCategorias = new javax.swing.JLabel();
-        jTextFieldDniCif = new javax.swing.JTextField();
-        jTextFieldNombre = new javax.swing.JTextField();
         jScrollPaneCategotiasProductos = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabelParaMostrarEmpresa = new javax.swing.JLabel();
@@ -90,10 +86,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jTableTickets = new javax.swing.JTable();
         jLabelDescuento = new javax.swing.JLabel();
         jTextDescuento = new javax.swing.JTextField();
-        jLabelMuestraFecha = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabelMuestraHora = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jMenuBarraMenus = new javax.swing.JMenuBar();
         jMenuCliente = new javax.swing.JMenu();
         jMenuGestionCliente = new javax.swing.JMenu();
@@ -122,12 +114,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabelEmpresa.setText("Empresa");
 
         jLabelVendedor.setText("Vendedor");
-
-        jLabelNombre.setText("Nombre/Empresa");
-        jLabelNombre.setMaximumSize(new java.awt.Dimension(5, 5));
-
-        jLabelDniCif.setText("DNI/CIF");
-        jLabelDniCif.setMaximumSize(new java.awt.Dimension(5, 5));
 
         jLabelTotal.setText("Total");
 
@@ -216,7 +202,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         jButtonNuevaCompra.setText("Nuevo Producto");
-        jButtonNuevaCompra.setActionCommand("Nuevo Producto");
         jButtonNuevaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonNuevaCompraActionPerformed(evt);
@@ -249,15 +234,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         jLabelProductosYCategorias.setText("Productos y Categorias");
-
-        jTextFieldDniCif.setMaximumSize(new java.awt.Dimension(5, 5));
-        jTextFieldDniCif.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldDniCifActionPerformed(evt);
-            }
-        });
-
-        jTextFieldNombre.setMaximumSize(new java.awt.Dimension(5, 5));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -321,14 +297,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabelMuestraFecha.setText("Fecha");
-
-        jLabel2.setText("jLabel2");
-
-        jLabelMuestraHora.setText("Hora");
-
-        jLabel4.setText("jLabel2");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -384,36 +352,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabelTotal))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabelIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextFieldIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabelMuestraFecha)
-                                                .addGap(29, 29, 29)
-                                                .addComponent(jLabel2)
-                                                .addGap(33, 33, 33)
-                                                .addComponent(jLabelMuestraHora)
-                                                .addGap(29, 29, 29)
-                                                .addComponent(jLabel4)))
+                                        .addComponent(jLabelIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabelDniCif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(12, 12, 12)
-                                                .addComponent(jTextFieldDniCif, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(jLabelDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jTextDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(8, 8, 8))
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                                .addGap(29, 29, 29)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 615, Short.MAX_VALUE)
                                                 .addComponent(jLabelVendedor)
                                                 .addGap(24, 24, 24)))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -433,27 +383,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabelParaMostrarEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldNombredelVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
-                        .addGap(15, 15, 15))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelMuestraFecha)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabelMuestraHora)
-                                .addComponent(jLabel4)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldNombredelVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelVendedor, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelDniCif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldDniCif, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -578,10 +514,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         modeloTicket.setValueAt(subtotal, modeloTicket.getRowCount() - 1, 3);
         calcularTotal();
     }//GEN-LAST:event_jBoton7ActionPerformed
-
-    private void jTextFieldDniCifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDniCifActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldDniCifActionPerformed
 
     private void jTextTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextTotalActionPerformed
         // TODO add your handling code here:
@@ -946,15 +878,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jBotonC;
     private javax.swing.JButton jBotonComidas;
     private javax.swing.JButton jButtonNuevaCompra;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelDescuento;
-    private javax.swing.JLabel jLabelDniCif;
     private javax.swing.JLabel jLabelEmpresa;
     private javax.swing.JLabel jLabelIdCliente;
-    private javax.swing.JLabel jLabelMuestraFecha;
-    private javax.swing.JLabel jLabelMuestraHora;
-    private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelParaMostrarEmpresa;
     private javax.swing.JLabel jLabelProductosYCategorias;
     private javax.swing.JLabel jLabelTotal;
@@ -976,9 +902,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTableTickets;
     private javax.swing.JTextField jTextDescuento;
-    private javax.swing.JTextField jTextFieldDniCif;
     private javax.swing.JTextField jTextFieldIdCliente;
-    private javax.swing.JTextField jTextFieldNombre;
     private javax.swing.JTextField jTextFieldNombredelVendedor;
     private javax.swing.JTextField jTextTotal;
     // End of variables declaration//GEN-END:variables

@@ -195,40 +195,19 @@
                                           <Component id="jLabelTotal" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jLabelIdCliente" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jTextFieldIdCliente" min="-2" pref="90" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="jLabelNombre" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Component id="jLabelMuestraFecha" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                                                  <Component id="jLabelMuestraHora" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                          <Component id="jLabelIdCliente" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jTextFieldNombre" pref="137" max="32767" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="jTextFieldIdCliente" min="-2" pref="90" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jLabelDniCif" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                                  <Component id="jTextFieldDniCif" min="-2" pref="168" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <EmptySpace max="32767" attributes="0"/>
                                                   <Component id="jLabelDescuento" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
                                                   <Component id="jTextDescuento" min="-2" pref="168" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="1" attributes="0">
-                                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                                  <EmptySpace pref="615" max="32767" attributes="0"/>
                                                   <Component id="jLabelVendedor" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                                               </Group>
@@ -261,33 +240,14 @@
                       <Component id="jLabelEmpresa" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTextFieldNombredelVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelVendedor" alignment="3" pref="21" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelMuestraFecha" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="3" groupAlignment="3" attributes="0">
-                                  <Component id="jLabelMuestraHora" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jTextFieldNombredelVendedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelVendedor" alignment="3" pref="21" max="32767" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTextFieldIdCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelIdCliente" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="jLabelNombre" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="jTextFieldNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabelDniCif" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldDniCif" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelDescuento" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextDescuento" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -352,22 +312,6 @@
         <Component class="javax.swing.JLabel" name="jLabelVendedor">
           <Properties>
             <Property name="text" type="java.lang.String" value="Vendedor"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabelNombre">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Nombre/Empresa"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[5, 5]"/>
-            </Property>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabelDniCif">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="DNI/CIF"/>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[5, 5]"/>
-            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelTotal">
@@ -472,7 +416,6 @@
         <Component class="javax.swing.JButton" name="jButtonNuevaCompra">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nuevo Producto"/>
-            <Property name="actionCommand" type="java.lang.String" value="Nuevo Producto"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNuevaCompraActionPerformed"/>
@@ -517,23 +460,6 @@
         <Component class="javax.swing.JLabel" name="jLabelProductosYCategorias">
           <Properties>
             <Property name="text" type="java.lang.String" value="Productos y Categorias"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldDniCif">
-          <Properties>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[5, 5]"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldDniCifActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldNombre">
-          <Properties>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[5, 5]"/>
-            </Property>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPaneCategotiasProductos">
@@ -642,26 +568,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextDescuentoActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabelMuestraFecha">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Fecha"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel2"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabelMuestraHora">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Hora"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel2"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>
