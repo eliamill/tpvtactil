@@ -168,8 +168,7 @@ public class ProductoVista extends javax.swing.JFrame {
         );
         jPanelProductoLayout.setVerticalGroup(
             jPanelProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelProductoLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
+            .addGroup(jPanelProductoLayout.createSequentialGroup()
                 .addComponent(jLabelSeleccioneProducto)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPaneTablaProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,8 +184,7 @@ public class ProductoVista extends javax.swing.JFrame {
                 .addGroup(jPanelProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonInsertarProducto)
                     .addComponent(jButtonModificarProducto)
-                    .addComponent(jButtonBorrarProducto))
-                .addGap(252, 252, 252))
+                    .addComponent(jButtonBorrarProducto)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,7 +199,7 @@ public class ProductoVista extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jPanelProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -213,11 +211,19 @@ public class ProductoVista extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldProductoActionPerformed
 
     private void jButtonModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarProductoActionPerformed
-        if (row != -1 && jTextFieldProducto.getText() != null && jTextFieldProducto.getText().length() > 0) {
+        if (row != -1 && jTextFieldProducto.getText() != null && jTextFieldProducto.getText().length() > 0
+                && jTextFieldIdCategoria.getText() != null && jTextFieldIdCategoria.getText().length() > 0) {
             try {
-                String nombre = (String) jTablePresentaProductos.getModel().getValueAt(row, 1);
+                String nombre = (String) jTablePresentaProductos.getModel().getValueAt(row, 2);
                 Producto producto = productoServicio.getProductoByNombre(nombre);
                 producto.setNombre(jTextFieldProducto.getText());
+                Categoria categoria = new Categoria();
+                categoria.setId(Integer.parseInt(jTextFieldIdCategoria.getText()));
+                List<Categoria> categorias = categoriaServicio.gestionarCategoria(categoria, TipoGestion.CONSULTAR);
+                if (categorias.size() > 0) {
+                    producto.setIdCategoria(Integer.parseInt(jTextFieldIdCategoria.getText()));
+                }
+                producto.setImagen(jTextFieldImagen.getText());
                 productoServicio.gestionarProducto(producto, TipoGestion.MODIFICAR);
                 List<Producto> productos = productoServicio.gestionarProducto(null, TipoGestion.LISTAR);
                 cargarProductosEnTabla(productos);
@@ -230,10 +236,18 @@ public class ProductoVista extends javax.swing.JFrame {
 
     private void jButtonInsertarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarProductoActionPerformed
         String nombreProducto = jTextFieldProducto.getText();
-        if (nombreProducto != null && nombreProducto.length() > 0) {
+        if (jTextFieldProducto.getText() != null && jTextFieldProducto.getText().length() > 0
+                && jTextFieldIdCategoria.getText() != null && jTextFieldIdCategoria.getText().length() > 0) {
             try {
                 Producto producto = new Producto();
                 producto.setNombre(nombreProducto);
+                Categoria categoria = new Categoria();
+                categoria.setId(Integer.parseInt(jTextFieldIdCategoria.getText()));
+                List<Categoria> categorias = categoriaServicio.gestionarCategoria(categoria, TipoGestion.CONSULTAR);
+                if (categorias.size() > 0) {
+                    producto.setIdCategoria(Integer.parseInt(jTextFieldIdCategoria.getText()));
+                }
+                producto.setImagen(jTextFieldImagen.getText());
                 productoServicio.gestionarProducto(producto, TipoGestion.INSERTAR);
                 List<Producto> productos = productoServicio.gestionarProducto(null, TipoGestion.LISTAR);
                 cargarProductosEnTabla(productos);
@@ -256,18 +270,18 @@ public class ProductoVista extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(ProductoVista.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        String nombreImagen = (String)jTablePresentaProductos.getModel().getValueAt(row, 3);
+
+        String nombreImagen = (String) jTablePresentaProductos.getModel().getValueAt(row, 3);
         jTextFieldImagen.setText(nombreImagen);
     }//GEN-LAST:event_jTablePresentaProductosMouseClicked
 
     private void jButtonBorrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarProductoActionPerformed
-        if (row != -1 && jTextFieldProducto.getText() != null && jTextFieldProducto.getText().length() > 0) {
+        if (row != -1) {
             try {
-                String nombre = (String) jTablePresentaProductos.getModel().getValueAt(row, 1);
+                String nombre = (String) jTablePresentaProductos.getModel().getValueAt(row, 2);
                 Producto producto = productoServicio.getProductoByNombre(nombre);
                 productoServicio.gestionarProducto(producto, TipoGestion.BORRAR);
-                List<Producto> productos = productoServicio.gestionarProducto(null, TipoGestion.BORRAR);
+                List<Producto> productos = productoServicio.gestionarProducto(null, TipoGestion.LISTAR);
                 cargarProductosEnTabla(productos);
             } catch (SQLException ex) {
                 Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);

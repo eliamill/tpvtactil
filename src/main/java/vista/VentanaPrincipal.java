@@ -168,6 +168,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jBotonC.setText("c");
 
         jButtonNuevaCompra.setText("Nuevo Ticket");
+        jButtonNuevaCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNuevaCompraActionPerformed(evt);
+            }
+        });
 
         jBotonAcceptarCompra.setText("Finalizar ticket");
         jBotonAcceptarCompra.setMaximumSize(new java.awt.Dimension(75, 23));
@@ -586,6 +591,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void jBotonAcceptarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAcceptarCompraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBotonAcceptarCompraActionPerformed
+
+    private void jButtonNuevaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevaCompraActionPerformed
+        
+    }//GEN-LAST:event_jButtonNuevaCompraActionPerformed
 
     public ImageIcon createImage(String path) {
         URL imgUrl = this.getClass().getClassLoader().getResource(path);

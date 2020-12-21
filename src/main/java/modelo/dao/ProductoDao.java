@@ -23,21 +23,26 @@ public class ProductoDao {
     private Connection conn = GestionSql.getConn();
 
     public void insertarProducto(Producto producto) throws SQLException {
-        String sql = "insert into Producto(nombre) values(?)";
+        String sql = "insert into Producto(idCategoria,nombre,imagen) values(?,?,?)";
         PreparedStatement pstm = conn.prepareStatement(sql);
-        pstm.setString(1, producto.getNombre());
+        pstm.setInt(1, producto.getIdCategoria());
+        pstm.setString(2, producto.getNombre());
+        pstm.setString(3, producto.getImagen());
+
         int row = pstm.executeUpdate();
     }
 
     public void modificarProducto(Producto producto) throws SQLException {
 
-        String sql = "update Producto set nombre = ? where id = ?";
+        String sql = "update Producto set idCategoria = ?,nombre = ?,imagen=? where id = ?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
-        pstm.setString(1, producto.getNombre());
+        pstm.setInt(1, producto.getIdCategoria());
+        pstm.setString(2, producto.getNombre());
+        pstm.setString(3, producto.getImagen());
 
-        pstm.setInt(2, producto.getId());
+        pstm.setInt(4, producto.getId());
 
         pstm.executeUpdate();
 
@@ -120,7 +125,7 @@ public class ProductoDao {
 
         return retorno;
     }
-    
+
     public Producto getProductoByNombre(String nombre) throws SQLException {
         String sql = "select * from Producto where nombre = ?";
 
@@ -141,5 +146,5 @@ public class ProductoDao {
         }
         return null;
     }
-    
+
 }
