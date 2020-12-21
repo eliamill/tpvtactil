@@ -130,4 +130,19 @@ public class TicketDao {
 
     }
 
+    public Ticket getUltimoTicket() throws SQLException {
+        String sql = "select * from ticket order by id desc limit 1";
+        PreparedStatement pstm = conn.prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+
+        if (resultSet.next()) {
+            Ticket retorno = new Ticket();
+            retorno.setId(resultSet.getInt("id"));
+            retorno.setIdCliente(resultSet.getInt("idCliente"));
+            return retorno;
+        }
+
+        return null;
+    }
+
 }

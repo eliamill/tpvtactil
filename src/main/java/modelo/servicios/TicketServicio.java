@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.dao.TicketDao;
+import modelo.dao.beans.Producto;
 import modelo.dao.beans.Ticket;
 import modelo.dao.beans.enums.TipoGestion;
 
@@ -17,6 +18,7 @@ import modelo.dao.beans.enums.TipoGestion;
  * @author brand
  */
 public class TicketServicio {
+
     private TicketDao ticketDao = new TicketDao();
 
     public List<Ticket> gestionarTicket(Ticket ticket, TipoGestion tipoGestion) throws SQLException {
@@ -40,5 +42,13 @@ public class TicketServicio {
                 tickets = ticketDao.consultarTickets();
         }
         return tickets;
+    }
+
+    public Ticket getUltimoTicket() throws SQLException {
+        return ticketDao.getUltimoTicket();
+    }
+
+    public void insertarProducto(Ticket ticket, Producto producto, int cantidad) throws SQLException {
+        ticketDao.insertarProducto(producto.getId(), ticket.getId(), cantidad);
     }
 }
