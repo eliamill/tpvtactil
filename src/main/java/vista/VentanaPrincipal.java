@@ -21,6 +21,7 @@ import modelo.dao.beans.Producto;
 import modelo.dao.beans.Ticket;
 import modelo.gestionBd.GestionSql;
 import modelo.servicios.ProductoServicio;
+import modelo.servicios.TicketServicio;
 
 /**
  *
@@ -30,14 +31,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     //prueba de comentario
     private ProductoServicio productoServicio = new ProductoServicio();
+    private TicketServicio ticketServicio = new TicketServicio();
 
     /**
      * Creates new form ventanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
-        initComponentsMios();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -69,7 +71,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jBoton1 = new javax.swing.JButton();
         jBoton2 = new javax.swing.JButton();
         jBoton3 = new javax.swing.JButton();
-        jBotonDecimal = new javax.swing.JButton();
         jBoton0 = new javax.swing.JButton();
         jBotonC = new javax.swing.JButton();
         jButtonNuevaCompra = new javax.swing.JButton();
@@ -163,13 +164,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jBoton3.setText("3");
 
-        jBotonDecimal.setText(".");
-
         jBoton0.setText("0");
 
         jBotonC.setText("c");
 
-        jButtonNuevaCompra.setText("Nuevo Ticket");
+        jButtonNuevaCompra.setText("Nuevo Producto");
+        jButtonNuevaCompra.setActionCommand("Nuevo Producto");
         jButtonNuevaCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonNuevaCompraActionPerformed(evt);
@@ -289,8 +289,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addGap(11, 11, 11)
                                 .addComponent(jBoton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jBotonDecimal, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(11, 11, 11)
+                                .addGap(49, 49, 49)
                                 .addComponent(jBoton0, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jBoton4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -412,9 +411,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(jBoton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(13, 13, 13)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jBotonDecimal, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jBoton0, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jBoton0, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jBotonC, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPaneCategotiasProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -503,6 +500,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         double precio = (Double) modeloTicket.getValueAt(modeloTicket.getRowCount() - 1, 2);
         double subTotal = Integer.parseInt(cantidadS) * precio;
         modeloTicket.setValueAt(subTotal, modeloTicket.getRowCount() - 1, 3);
+        calcularTotal();
     }//GEN-LAST:event_jBoton7ActionPerformed
 
     private void jTextFieldDniCifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDniCifActionPerformed
@@ -601,7 +599,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBotonComidasActionPerformed
 
     private void jBotonAcceptarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAcceptarCompraActionPerformed
-        // TODO add your handling code here:
+        Ticket ticket = new Ticket();
+        ticket.setIdCliente(Integer.parseInt(jTextFieldIdCliente.getText()));
+        
     }//GEN-LAST:event_jBotonAcceptarCompraActionPerformed
 
     private void jButtonNuevaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevaCompraActionPerformed
@@ -644,8 +644,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             } else {
                 int cantidad = (Integer) modeloTicket.getValueAt(modeloTicket.getRowCount() - 1, 0);
                 double subtotal = cantidad * (Double) modeloTicket.getValueAt(modeloTicket.getRowCount() - 1, 2);
-                subtotal = (Math.round(subtotal) * 100d) / 100d;
+                subtotal = (Math.round(subtotal * 100d)) / 100d;
                 modeloTicket.setValueAt(subtotal, modeloTicket.getRowCount() - 1, 3);
+                calcularTotal();
             }
         } catch (MalformedURLException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -717,7 +718,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton jBotonBebidas;
     private javax.swing.JButton jBotonC;
     private javax.swing.JButton jBotonComidas;
-    private javax.swing.JButton jBotonDecimal;
     private javax.swing.JButton jButtonNuevaCompra;
     private javax.swing.JLabel jLabelDniCif;
     private javax.swing.JLabel jLabelEmpresa;
@@ -756,8 +756,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextTotal;
     // End of variables declaration//GEN-END:variables
 
-    private void initComponentsMios() {
+    
 
+    private void calcularTotal() {
+        TableModel modeloTicket = jTableTickets.getModel();
+        double total = 0.0;
+        for (int i = 0; i < modeloTicket.getRowCount(); i++) {
+            double subtotal = (Double)modeloTicket.getValueAt(i, 3);
+            total += subtotal;
+        }
+        jTextTotal.setText(total + "");
     }
 
 }
