@@ -293,6 +293,7 @@ public class CategoriaVista extends javax.swing.JFrame {
             @Override
             public Class getColumnClass(int column) {
                 return getValueAt(0, column).getClass();
+            
             }
         };
         jTablePresentaCategorias.setModel(defaultTableModel);

@@ -25,7 +25,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,13 +48,13 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelNombreCliente" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTextFieldNombreCliente" min="-2" pref="133" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jLabelDni" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jTextFieldDni" min="-2" pref="101" max="-2" attributes="0"/>
-                  <EmptySpace pref="124" max="32767" attributes="0"/>
+                  <EmptySpace pref="588" max="32767" attributes="0"/>
                   <Component id="jButtonModificarCliente" min="-2" pref="82" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jBorrarCliente" min="-2" pref="82" max="-2" attributes="0"/>
@@ -63,7 +63,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="234" max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelSeleccioneCliente" min="-2" pref="105" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -75,9 +75,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="jLabelSeleccioneCliente" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" pref="103" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="106" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButtonModificarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBorrarCliente" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -86,7 +86,7 @@
                       <Component id="jLabelDni" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldDni" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="217" max="32767" attributes="0"/>
+                  <EmptySpace pref="248" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -98,6 +98,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldNombreCliente">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldNombreClienteActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelNombreCliente">
           <Properties>
@@ -130,7 +133,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBorrarClienteActionPerformed"/>
           </Events>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
