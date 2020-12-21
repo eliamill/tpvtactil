@@ -35,7 +35,7 @@ public class CategoriaServicio {
             case CONSULTAR:
                 Categoria categoriaTmp = categoriaDao.consultarCategoria(categoria.getId());
                 if (categoriaTmp != null) {
-                    categorias.add(categoria);
+                    categorias.add(categoriaTmp);
                 }
                 break;
             case LISTAR:

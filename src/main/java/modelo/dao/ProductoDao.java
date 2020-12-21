@@ -67,7 +67,9 @@ public class ProductoDao {
         if (resultSet.next()) {
             Producto retorno = new Producto();
             retorno.setId(resultSet.getInt("id"));
+            retorno.setIdCategoria(resultSet.getInt("idCategoria"));
             retorno.setNombre(resultSet.getString("nombre"));
+            retorno.setImagen(resultSet.getString("imagen"));
             return retorno;
         }
 
@@ -89,7 +91,7 @@ public class ProductoDao {
             producto.setId(resultSet.getInt("id"));
             producto.setNombre(resultSet.getString("nombre"));
             producto.setIdCategoria(resultSet.getInt("idCategoria"));
-            // producto.setCantidad(resultSet.getInt("cantidad"));
+            producto.setImagen(resultSet.getString("imagen"));
             retorno.add(producto);
         }
 
@@ -111,14 +113,15 @@ public class ProductoDao {
             Producto producto = new Producto();
             producto.setId(resultSet.getInt("id"));
             producto.setNombre(resultSet.getString("nombre"));
+            producto.setIdCategoria(resultSet.getInt("idCategoria"));
             producto.setImagen(resultSet.getString("imagen"));
             retorno.add(producto);
         }
 
         return retorno;
     }
-
-    public Producto getCategoriaByNombre(String nombre) throws SQLException {
+    
+    public Producto getProductoByNombre(String nombre) throws SQLException {
         String sql = "select * from Producto where nombre = ?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -131,9 +134,12 @@ public class ProductoDao {
             Producto retorno = new Producto();
             retorno.setId(resultSet.getInt("id"));
             retorno.setNombre(resultSet.getString("nombre"));
+            retorno.setImagen(resultSet.getString("imagen"));
+            retorno.setIdCategoria(resultSet.getInt("idCategoria"));
             return retorno;
 
         }
         return null;
     }
+    
 }

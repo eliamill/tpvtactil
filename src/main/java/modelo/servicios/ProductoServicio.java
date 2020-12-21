@@ -5,6 +5,8 @@
  */
 package modelo.servicios;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,8 @@ public class ProductoServicio {
     }
 
     public Producto getProductoByNombre(String nombre) throws SQLException {
-        return productoDao.getCategoriaByNombre(nombre);
+        return productoDao.getProductoByNombre(nombre);
     }
+    
+    
 }
