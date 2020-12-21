@@ -52,6 +52,10 @@ public class ProductoServicio {
     public Producto getProductoByNombre(String nombre) throws SQLException {
         return productoDao.getProductoByNombre(nombre);
     }
+
+    public Producto getProductoByImagen(String nombreImagen) {
+        return productoDao.getProductoByImagen(nombreImagen);
+    }
     
     
 }

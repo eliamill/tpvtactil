@@ -6,6 +6,8 @@
 package vista;
 
 import control.BotonesAction;
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import modelo.dao.beans.Producto;
 import modelo.dao.beans.Ticket;
 import modelo.gestionBd.GestionSql;
@@ -26,7 +29,6 @@ import modelo.servicios.ProductoServicio;
 public class VentanaPrincipal extends javax.swing.JFrame {
 
     //prueba de comentario
-
     private ProductoServicio productoServicio = new ProductoServicio();
 
     /**
@@ -84,7 +86,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabelIdCliente = new javax.swing.JLabel();
         jTextFieldIdCliente = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jTableTickets = new javax.swing.JTable();
         jLabelhoraValue = new javax.swing.JLabel();
         jLabelFechaValue = new javax.swing.JLabel();
         jLabelNumTicketValue = new javax.swing.JLabel();
@@ -226,6 +228,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPaneCategotiasProductos.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
@@ -236,7 +243,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jTextFieldIdCliente.setMaximumSize(new java.awt.Dimension(5, 5));
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTickets.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"No hay productos"},
                 {null},
@@ -255,7 +262,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable3);
+        jScrollPane2.setViewportView(jTableTickets);
 
         jLabelNumTicketValue.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -489,8 +496,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBoton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoton7ActionPerformed
-        new BotonesAction().realizarAccion(evt.getActionCommand());
-        jTextTotal.setText("7");
+        TableModel modeloTicket = jTableTickets.getModel();
+        int cantidad = (Integer) modeloTicket.getValueAt(modeloTicket.getRowCount() - 1, 0);
+        String cantidadS = cantidad + "7";
+        modeloTicket.setValueAt(Integer.parseInt(cantidadS), modeloTicket.getRowCount() - 1, 0);
+        double precio = (Double) modeloTicket.getValueAt(modeloTicket.getRowCount() - 1, 2);
+        double subTotal = Integer.parseInt(cantidadS) * precio;
+        modeloTicket.setValueAt(subTotal, modeloTicket.getRowCount() - 1, 3);
     }//GEN-LAST:event_jBoton7ActionPerformed
 
     private void jTextFieldDniCifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDniCifActionPerformed
@@ -511,7 +523,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuGestionClienteMouseClicked
 
     private void jBotonBebidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonBebidasActionPerformed
-       try {
+        try {
             List<Producto> productos = productoServicio.getProductoByCategoria(2);
             double numFilas = Math.ceil(productos.size() / 3.0);
             Object[][] data = new Object[(int) numFilas][3];
@@ -521,17 +533,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 for (int i = 0; i < 3; i++) {
                     if (contador < productos.size()) {
                         data[j][i] = createImage("imagenes/" + productos.get(contador).getImagen());
-                    }else{
+                    } else {
                         data[j][i] = "";
                     }
                     contador++;
                 }
             }
-            DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"", "", ""}){
-              @Override
-              public Class getColumnClass(int column){
-                  return getValueAt(0, column).getClass();
-              }  
+            DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"", "", ""}) {
+                @Override
+                public Class getColumnClass(int column) {
+                    return getValueAt(0, column).getClass();
+                }
             };
             jTable2.setRowHeight(185);
             jTable2.setModel(defaultTableModel);
@@ -542,22 +554,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBotonBebidasActionPerformed
 
     private void jMenuGestionCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuGestionCategoriaMouseClicked
-     CategoriaVista categoria = new CategoriaVista();
+        CategoriaVista categoria = new CategoriaVista();
         categoria.setVisible(true);
     }//GEN-LAST:event_jMenuGestionCategoriaMouseClicked
 
     private void jMenuGestionProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuGestionProductoMouseClicked
-       ProductoVista producto= new ProductoVista();
-       producto.setVisible(true);
+        ProductoVista producto = new ProductoVista();
+        producto.setVisible(true);
     }//GEN-LAST:event_jMenuGestionProductoMouseClicked
 
     private void jMenuGestionTicketMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuGestionTicketMouseClicked
-       TicketVista ticket = new TicketVista();
-       ticket.setVisible (true);
+        TicketVista ticket = new TicketVista();
+        ticket.setVisible(true);
     }//GEN-LAST:event_jMenuGestionTicketMouseClicked
 
     private void jBotonComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonComidasActionPerformed
-  try {
+        try {
             List<Producto> productos = productoServicio.getProductoByCategoria(1);
             double numFilas = Math.ceil(productos.size() / 3.0);
             Object[][] data = new Object[(int) numFilas][3];
@@ -567,24 +579,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 for (int i = 0; i < 3; i++) {
                     if (contador < productos.size()) {
                         data[j][i] = createImage("imagenes/" + productos.get(contador).getImagen());
-                    }else{
+                    } else {
                         data[j][i] = "";
                     }
                     contador++;
                 }
             }
-            DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"", "", ""}){
-              @Override
-              public Class getColumnClass(int column){
-                  return getValueAt(0, column).getClass();
-              }  
+            DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"", "", ""}) {
+                @Override
+                public Class getColumnClass(int column) {
+                    return getValueAt(0, column).getClass();
+                }
             };
             jTable2.setRowHeight(185);
             jTable2.setModel(defaultTableModel);
 
         } catch (SQLException ex) {
             Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }    
+        }
 
     }//GEN-LAST:event_jBotonComidasActionPerformed
 
@@ -593,8 +605,52 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jBotonAcceptarCompraActionPerformed
 
     private void jButtonNuevaCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevaCompraActionPerformed
-        
+        TableModel modelo = jTableTickets.getModel();
+        Object[][] data = new Object[1][4];
+        data[0][0] = 0;
+        data[0][3] = 0.0;
+        if (modelo.getColumnCount() == 4 && ((String) modelo.getValueAt(modelo.getRowCount() - 1, 1)) != null) {
+            data = new Object[modelo.getRowCount() + 1][4];
+            data[modelo.getRowCount()][0] = 0;
+            data[modelo.getRowCount()][3] = 0.0;
+            for (int i = 0; i < modelo.getRowCount(); i++) {
+                for (int j = 0; j < modelo.getColumnCount(); j++) {
+                    data[i][j] = modelo.getValueAt(i, j);
+                }
+            }
+        }
+        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Cantidad", "Producto", "Precio", "Subtotal"});
+        jTableTickets.setModel(defaultTableModel);
+
+
     }//GEN-LAST:event_jButtonNuevaCompraActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        try {
+            JTable source = (JTable) evt.getSource();
+            int row = source.rowAtPoint(evt.getPoint());
+            int col = source.columnAtPoint(evt.getPoint());
+            TableModel modelo = source.getModel();
+            ImageIcon imagen = (ImageIcon) modelo.getValueAt(row, col);
+            URL urlImagen = new URL(imagen.getDescription());
+            String nombreImagen = new File(urlImagen.getFile()).getName();
+            Producto producto = productoServicio.getProductoByImagen(nombreImagen);
+            TableModel modeloTicket = jTableTickets.getModel();
+            modeloTicket.setValueAt(producto.getNombre(), modeloTicket.getRowCount() - 1, 1);
+            modeloTicket.setValueAt(producto.getPrecio(), modeloTicket.getRowCount() - 1, 2);
+            if ((Integer) modeloTicket.getValueAt(modeloTicket.getRowCount() - 1, 0) == 0) {
+                modeloTicket.setValueAt(0, modeloTicket.getRowCount() - 1, 0);
+                modeloTicket.setValueAt(0, modeloTicket.getRowCount() - 1, 3);
+            } else {
+                int cantidad = (Integer) modeloTicket.getValueAt(modeloTicket.getRowCount() - 1, 0);
+                double subtotal = cantidad * (Double) modeloTicket.getValueAt(modeloTicket.getRowCount() - 1, 2);
+                subtotal = (Math.round(subtotal) * 100d) / 100d;
+                modeloTicket.setValueAt(subtotal, modeloTicket.getRowCount() - 1, 3);
+            }
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jTable2MouseClicked
 
     public ImageIcon createImage(String path) {
         URL imgUrl = this.getClass().getClassLoader().getResource(path);
@@ -692,7 +748,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPaneCategotiasProductos;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTableTickets;
     private javax.swing.JTextField jTextFieldDniCif;
     private javax.swing.JTextField jTextFieldIdCliente;
     private javax.swing.JTextField jTextFieldNombre;
@@ -701,7 +757,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void initComponentsMios() {
-        
+
     }
 
 }

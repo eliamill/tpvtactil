@@ -15,6 +15,15 @@ public class Producto {
     private String nombre;
     private String imagen;
     private int idCategoria;
+    private double precio;
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
 
     public int getIdCategoria() {
         return idCategoria;

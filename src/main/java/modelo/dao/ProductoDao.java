@@ -75,6 +75,7 @@ public class ProductoDao {
             retorno.setIdCategoria(resultSet.getInt("idCategoria"));
             retorno.setNombre(resultSet.getString("nombre"));
             retorno.setImagen(resultSet.getString("imagen"));
+            retorno.setPrecio(resultSet.getDouble("precio"));
             return retorno;
         }
 
@@ -97,6 +98,7 @@ public class ProductoDao {
             producto.setNombre(resultSet.getString("nombre"));
             producto.setIdCategoria(resultSet.getInt("idCategoria"));
             producto.setImagen(resultSet.getString("imagen"));
+            producto.setPrecio(resultSet.getDouble("precio"));
             retorno.add(producto);
         }
 
@@ -120,6 +122,7 @@ public class ProductoDao {
             producto.setNombre(resultSet.getString("nombre"));
             producto.setIdCategoria(resultSet.getInt("idCategoria"));
             producto.setImagen(resultSet.getString("imagen"));
+            producto.setPrecio(resultSet.getDouble("precio"));
             retorno.add(producto);
         }
 
@@ -141,6 +144,29 @@ public class ProductoDao {
             retorno.setNombre(resultSet.getString("nombre"));
             retorno.setImagen(resultSet.getString("imagen"));
             retorno.setIdCategoria(resultSet.getInt("idCategoria"));
+            retorno.setPrecio(resultSet.getDouble("precio"));
+            return retorno;
+
+        }
+        return null;
+    }
+
+    public Producto getProductoByImagen(String nombreImagen) throws SQLException {
+        String sql = "select * from Producto where imagen = ?";
+
+        PreparedStatement pstm = conn.prepareStatement(sql);
+
+        pstm.setString(1, nombreImagen);
+
+        ResultSet resultSet = pstm.executeQuery();
+
+        if (resultSet.next()) {
+            Producto retorno = new Producto();
+            retorno.setId(resultSet.getInt("id"));
+            retorno.setNombre(resultSet.getString("nombre"));
+            retorno.setImagen(resultSet.getString("imagen"));
+            retorno.setIdCategoria(resultSet.getInt("idCategoria"));
+            retorno.setPrecio(resultSet.getDouble("precio"));
             return retorno;
 
         }
