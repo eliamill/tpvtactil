@@ -76,7 +76,7 @@ public class ClienteDao {
     }
 
     public List<Cliente> consultarClientes() throws SQLException {
-        String sql = "select * from Cliente";
+        String sql = "select * from cliente";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 

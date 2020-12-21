@@ -15,9 +15,9 @@ import java.sql.SQLException;
  */
 public class GestionSql {
 
-    private String url = "jdbc:mysql://www.ired.es/eliaTPV?serverTimezone=Europe/Madrid";
-    private String user = "elia";
-    private String password = "Xjv6k74&";
+    private String url = "jdbc:mysql://localhost/tpvtactil?serverTimezone=Europe/Madrid";
+    private String user = "fastfood";
+    private String password = "123456";
 
     private static Connection conn;
 

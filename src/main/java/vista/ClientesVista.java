@@ -278,7 +278,7 @@ public class ClientesVista extends javax.swing.JFrame {
       
         Object[][] data = new Object[(int) clientes.size()][2];
 
-        for (int j = 2; j < clientes.size(); j++) {
+        for (int j = 0; j < clientes.size(); j++) {
             Cliente cliente = clientes.get(j);
             for (int i = 0; i < 2; i++) {
                 if (i == 0) {
