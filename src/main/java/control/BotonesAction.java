@@ -6,8 +6,9 @@
 package control;
 
 /**
- *
- * @author brand
+ *Clase BotonesAccion
+ * @author Eliamill Brandt
+ * @version 1.1
  */
 public class BotonesAction{
 
