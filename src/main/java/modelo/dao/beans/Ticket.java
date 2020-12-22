@@ -15,10 +15,10 @@ public class Ticket {
     private int idCliente;
     private double total;
 
-    @Override
-    public String toString() {
+    //@Override
+   /* public String toString() {
         return "ticket con id " + id + " con cliente " + idCliente + " con total " + total;
-    }
+    }*/
 
     public int getId() {
         return id;
@@ -44,8 +44,6 @@ public class Ticket {
         this.total = total;
     }
 
-    public void setVisible(boolean b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 }
