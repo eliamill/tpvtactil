@@ -15,13 +15,21 @@ import modelo.dao.beans.Ticket;
 import modelo.gestionBd.GestionSql;
 
 /**
+ * Clase TicketDao Para realizarlas las gestiones con la BD
  *
- * @author brand
+ * @author Eliamill Brandt
+ * @version 1.1
  */
 public class TicketDao {
 
     private Connection conn = GestionSql.getConn();
 
+    /**
+     * Método para insertar Ticket
+     *
+     * @param ticket
+     * @throws SQLException
+     */
     public void insertarTicket(Ticket ticket) throws SQLException {
         String sql = "insert into ticket(idCliente,total) values(?,?)";
         PreparedStatement pstm = conn.prepareStatement(sql);
@@ -30,6 +38,12 @@ public class TicketDao {
         int row = pstm.executeUpdate();
     }
 
+    /**
+     * Método para modificar Ticket
+     *
+     * @param ticket
+     * @throws SQLException
+     */
     public void modificarTicket(Ticket ticket) throws SQLException {
 
         String sql = "update ticket set idCliente = ?, total =? where id = ?";
@@ -44,6 +58,12 @@ public class TicketDao {
 
     }
 
+    /**
+     * Método para Borrar Ticket
+     *
+     * @param ticket
+     * @throws SQLException
+     */
     public void borrarTicket(Ticket ticket) throws SQLException {
 
         String sql = "delete from ticket where id = ?";
@@ -56,6 +76,13 @@ public class TicketDao {
 
     }
 
+    /**
+     * Método para Consultar Ticket
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public Ticket consultarTicket(int id) throws SQLException {
         String sql = "select * from Ticket where id = ?";
 
@@ -76,6 +103,12 @@ public class TicketDao {
 
     }
 
+    /**
+     * Método Consultar Ticket
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<Ticket> consultarTickets() throws SQLException {
         String sql = "select * from ticket";
 
@@ -97,6 +130,13 @@ public class TicketDao {
 
     }
 
+    /**
+     * Método Listar Ticket
+     *
+     * @param idCliente
+     * @return
+     * @throws SQLException
+     */
     public List<Ticket> consultarTicketsDeCliente(int idCliente) throws SQLException {
         String sql = "select * from ticket where idCliente = ?";
 
@@ -119,17 +159,31 @@ public class TicketDao {
 
     }
 
-    public void insertarProducto(int idProducto,int idTicket,int cantidad) throws SQLException {
+    /**
+     * Método que asocia el producto comprado cn el ticket
+     *
+     * @param idProducto
+     * @param idTicket
+     * @param cantidad
+     * @throws SQLException
+     */
+    public void insertarProducto(int idProducto, int idTicket, int cantidad) throws SQLException {
         String sql = "insert into producto_ticket (idProducto,idTicket,cantidad)values(?,?,?)";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, idProducto);
         pstm.setInt(2, idTicket);
-        pstm.setInt(3,cantidad);
-        
+        pstm.setInt(3, cantidad);
+
         pstm.executeUpdate();
 
     }
 
+    /**
+     * Método que obtiene el ultimo ticket
+     *
+     * @return
+     * @throws SQLException
+     */
     public Ticket getUltimoTicket() throws SQLException {
         String sql = "select * from ticket order by id desc limit 1";
         PreparedStatement pstm = conn.prepareStatement(sql);

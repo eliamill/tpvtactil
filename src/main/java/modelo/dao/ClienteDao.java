@@ -15,27 +15,39 @@ import modelo.dao.beans.Cliente;
 import modelo.gestionBd.GestionSql;
 
 /**
+ * Clase ClienteDao Para realizarlas las gestiones con la BD
  *
- * @author brand
+ * @author Eliamill Brandt
+ * @version 1.1
  */
 public class ClienteDao {
 
     private Connection conn = GestionSql.getConn();
 
+    /**
+     * Método Insertar Cliente
+     *
+     * @param cliente
+     * @throws SQLException
+     */
     public void insertarCliente(Cliente cliente) throws SQLException {
         String sql = "insert into Cliente(nombre,dnicif) values(?,?)";
-       
+
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, cliente.getNombre());
         pstm.setString(2, cliente.getDnicif());
         int row = pstm.executeUpdate();
     }
 
+    /**
+     * Método Modificar Cliente
+     *
+     * @param cliente
+     * @throws SQLException
+     */
     public void modificarCliente(Cliente cliente) throws SQLException {
 
         String sql = "update Cliente set nombre = ?,dnicif=? where id = ?";
-        
-       
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -47,6 +59,12 @@ public class ClienteDao {
 
     }
 
+    /**
+     * Método Borrar Cliente
+     *
+     * @param cliente
+     * @throws SQLException
+     */
     public void borrarCliente(Cliente cliente) throws SQLException {
 
         String sql = "delete from Cliente where id = ?";
@@ -59,6 +77,13 @@ public class ClienteDao {
 
     }
 
+    /**
+     * Método Consultar Cliente
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public Cliente consultarCliente(int id) throws SQLException {
         String sql = "select * from Cliente where id = ?";
 
@@ -79,6 +104,12 @@ public class ClienteDao {
 
     }
 
+    /**
+     * Método Listar Cliente
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<Cliente> consultarClientes() throws SQLException {
         String sql = "select * from cliente";
 
@@ -100,23 +131,30 @@ public class ClienteDao {
 
     }
 
+    /**
+     * Método Consultar cliente por nombre
+     *
+     * @param nombre
+     * @return
+     * @throws SQLException
+     */
     public Cliente getCategoriaByNombre(String nombre) throws SQLException {
         String sql = "select * from Cliente where nombre = ?";
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
         pstm.setString(1, nombre);
-        
+
         ResultSet resultSet = pstm.executeQuery();
-        
-        if(resultSet.next()){
+
+        if (resultSet.next()) {
             Cliente retorno = new Cliente();
             retorno.setId(resultSet.getInt("id"));
             retorno.setNombre(resultSet.getString("nombre"));
             retorno.setDnicif(resultSet.getString("dnicif"));
             return retorno;
         }
-        
+
         return null;
     }
 }

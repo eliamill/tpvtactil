@@ -6,8 +6,10 @@
 package modelo.dao.beans.enums;
 
 /**
+ * Clase TipoGestion Para realizar la llamada mas rapida de la gestión
  *
- * @author brand
+ * @author Eliamill Brandt
+ * @version 1.1
  */
 public enum TipoGestion {
     INSERTAR, MODIFICAR, BORRAR, CONSULTAR, LISTAR
