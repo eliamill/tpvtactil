@@ -23,21 +23,25 @@ public class ClienteDao {
     private Connection conn = GestionSql.getConn();
 
     public void insertarCliente(Cliente cliente) throws SQLException {
-        String sql = "insert into Cliente(nombre) values(?)";
+        String sql = "insert into Cliente(nombre,dnicif) values(?,?)";
+       
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setString(1, cliente.getNombre());
+        pstm.setString(2, cliente.getDnicif());
         int row = pstm.executeUpdate();
     }
 
     public void modificarCliente(Cliente cliente) throws SQLException {
 
-        String sql = "update Cliente set nombre = ? where id = ?";
+        String sql = "update Cliente set nombre = ?,dnicif=? where id = ?";
+        
+       
 
         PreparedStatement pstm = conn.prepareStatement(sql);
 
         pstm.setString(1, cliente.getNombre());
-
-        pstm.setInt(2, cliente.getId());
+        pstm.setString(2, cliente.getDnicif());
+        pstm.setInt(3, cliente.getId());
 
         pstm.executeUpdate();
 
@@ -109,6 +113,7 @@ public class ClienteDao {
             Cliente retorno = new Cliente();
             retorno.setId(resultSet.getInt("id"));
             retorno.setNombre(resultSet.getString("nombre"));
+            retorno.setDnicif(resultSet.getString("dnicif"));
             return retorno;
         }
         
