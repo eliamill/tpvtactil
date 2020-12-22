@@ -13,12 +13,23 @@ import modelo.dao.beans.Cliente;
 import modelo.dao.beans.enums.TipoGestion;
 
 /**
+ * Clase ClienteServicio Para gestionar servicios
  *
- * @author brand
+ * @author Eliamill Brandt
+ * @version 1.1
  */
 public class ClienteServicio {
-   private ClienteDao clienteDao = new ClienteDao();
 
+    private ClienteDao clienteDao = new ClienteDao();
+
+    /**
+     * Método Gestionar Cliente
+     *
+     * @param cliente
+     * @param tipoGestion
+     * @return
+     * @throws SQLException
+     */
     public List<Cliente> gestionarCliente(Cliente cliente, TipoGestion tipoGestion) throws SQLException {
         List<Cliente> clientes = new ArrayList<>();
         switch (tipoGestion) {
@@ -42,7 +53,14 @@ public class ClienteServicio {
         return clientes;
     }
 
+    /**
+     * Método obtener cliente por nombre
+     *
+     * @param nombre
+     * @return
+     * @throws SQLException
+     */
     public Cliente getClienteByNombre(String nombre) throws SQLException {
-       return clienteDao.getCategoriaByNombre(nombre);
+        return clienteDao.getCategoriaByNombre(nombre);
     }
 }

@@ -17,8 +17,10 @@ import modelo.gestionBd.GestionSql;
 import modelo.servicios.ClienteServicio;
 
 /**
+ * Clase ClientesVista
  *
- * @author brand
+ * @author Eliamill Brandt
+ * @version 1.1
  */
 public class ClientesVista extends javax.swing.JFrame {
 
@@ -26,7 +28,7 @@ public class ClientesVista extends javax.swing.JFrame {
     private int row = -1;
 
     /**
-     * Creates new form Clientes
+     * Método que lista en tabla inicialmente Creates new form Clientes
      */
     public ClientesVista() {
         initComponents();
@@ -196,11 +198,16 @@ public class ClientesVista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldDniActionPerformed
 
+    /**
+     * Método que llama un evento en el boton mofificar
+     *
+     * @param evt
+     */
     private void jButtonModificarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarClienteActionPerformed
         if (row != -1 && jTextFieldNombreCliente.getText() != null && jTextFieldNombreCliente.getText().length() > 0) {
             try {
                 String nombre = (String) jTablePresentaClientes.getModel().getValueAt(row, 1);
-                String dnicif = (String)  jTablePresentaClientes.getModel().getValueAt(row, 2);
+                String dnicif = (String) jTablePresentaClientes.getModel().getValueAt(row, 2);
                 Cliente cliente = clienteServicio.getClienteByNombre(nombre);
                 cliente.setNombre(jTextFieldNombreCliente.getText());
                 cliente.setDnicif(jTextFieldDni.getText());
@@ -214,6 +221,11 @@ public class ClientesVista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonModificarClienteActionPerformed
 
+    /**
+     * Método que llama un evento en el boton borrar
+     *
+     * @param evt
+     */
     private void jBorrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBorrarClienteActionPerformed
         if (row != -1 && jTextFieldNombreCliente.getText() != null && jTextFieldNombreCliente.getText().length() > 0) {
             try {
@@ -230,12 +242,17 @@ public class ClientesVista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBorrarClienteActionPerformed
 
+    /**
+     * Método que permite seleccionar filas en la tabla
+     *
+     * @param evt
+     */
     private void jTablePresentaClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePresentaClientesMouseClicked
         JTable source = (JTable) evt.getSource();
         row = source.rowAtPoint(evt.getPoint());
-        String nombre = (String)  jTablePresentaClientes.getModel().getValueAt(row, 1);
+        String nombre = (String) jTablePresentaClientes.getModel().getValueAt(row, 1);
         jTextFieldNombreCliente.setText(nombre);
-        String dnicif = (String)  jTablePresentaClientes.getModel().getValueAt(row, 2);
+        String dnicif = (String) jTablePresentaClientes.getModel().getValueAt(row, 2);
         jTextFieldDni.setText(dnicif);
     }//GEN-LAST:event_jTablePresentaClientesMouseClicked
 
@@ -243,14 +260,19 @@ public class ClientesVista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNombreClienteActionPerformed
 
+    /**
+     * Método que llama un evento en el boton insertar
+     *
+     * @param evt
+     */
     private void jButtonInsertarrClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarrClienteActionPerformed
-      if (row != -1 && jTextFieldNombreCliente.getText() != null && jTextFieldNombreCliente.getText().length() > 0
-              && jTextFieldDni.getText() != null && jTextFieldDni.getText().length() > 0) {
+        if (row != -1 && jTextFieldNombreCliente.getText() != null && jTextFieldNombreCliente.getText().length() > 0
+                && jTextFieldDni.getText() != null && jTextFieldDni.getText().length() > 0) {
             try {
                 String nombre = (String) jTablePresentaClientes.getModel().getValueAt(row, 1);
                 Cliente cliente = clienteServicio.getClienteByNombre(nombre);
                 cliente.setNombre(jTextFieldNombreCliente.getText());
-                String dnicif = (String)  jTablePresentaClientes.getModel().getValueAt(row, 2);
+                String dnicif = (String) jTablePresentaClientes.getModel().getValueAt(row, 2);
                 cliente.setDnicif(jTextFieldDni.getText());
                 clienteServicio.gestionarCliente(cliente, TipoGestion.INSERTAR);
                 List<Cliente> clientes = clienteServicio.gestionarCliente(null, TipoGestion.LISTAR);
@@ -263,6 +285,8 @@ public class ClientesVista extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonInsertarrClienteActionPerformed
 
     /**
+     * Método inicial de la venta independiente
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -312,9 +336,13 @@ public class ClientesVista extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNombreCliente;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Método que obtine la data para listar la informacion inicial en la tabla
+     *
+     * @param clientes
+     */
     private void cargarClientesEnTabla(List<Cliente> clientes) {
 
-      
         Object[][] data = new Object[(int) clientes.size()][3];
 
         for (int j = 0; j < clientes.size(); j++) {
@@ -322,19 +350,19 @@ public class ClientesVista extends javax.swing.JFrame {
             for (int i = 0; i < 3; i++) {
                 if (i == 0) {
                     data[j][i] = cliente.getId();
-                }else if (i == 1) {
+                } else if (i == 1) {
                     data[j][i] = cliente.getNombre();
-                }  else {
+                } else {
                     data[j][i] = cliente.getDnicif();
                 }
             }
         }
 
-        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id", "Nombre","DNICIF"}) {
+        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id", "Nombre", "DNICIF"}) {
             @Override
             public Class getColumnClass(int column) {
                 return getValueAt(0, column).getClass();
-            
+
             }
         };
         jTablePresentaClientes.setModel(defaultTableModel);

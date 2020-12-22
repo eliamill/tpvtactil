@@ -14,13 +14,23 @@ import modelo.dao.beans.Ticket;
 import modelo.dao.beans.enums.TipoGestion;
 
 /**
+ * Clase TicketServicio Para gestionar servicios
  *
- * @author brand
+ * @author Eliamill Brandt
+ * @version 1.1
  */
 public class TicketServicio {
 
     private TicketDao ticketDao = new TicketDao();
 
+    /**
+     * Método getionar ticket
+     *
+     * @param ticket
+     * @param tipoGestion
+     * @return
+     * @throws SQLException
+     */
     public List<Ticket> gestionarTicket(Ticket ticket, TipoGestion tipoGestion) throws SQLException {
         List<Ticket> tickets = new ArrayList<>();
         switch (tipoGestion) {
@@ -44,10 +54,24 @@ public class TicketServicio {
         return tickets;
     }
 
+    /**
+     * Método que obtiene el ultimo ticket
+     *
+     * @return
+     * @throws SQLException
+     */
     public Ticket getUltimoTicket() throws SQLException {
         return ticketDao.getUltimoTicket();
     }
 
+    /**
+     * Método que inserta producto en ticket
+     *
+     * @param ticket
+     * @param producto
+     * @param cantidad
+     * @throws SQLException
+     */
     public void insertarProducto(Ticket ticket, Producto producto, int cantidad) throws SQLException {
         ticketDao.insertarProducto(producto.getId(), ticket.getId(), cantidad);
     }

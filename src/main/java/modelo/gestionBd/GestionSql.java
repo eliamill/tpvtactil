@@ -10,8 +10,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
+ * Clase GestionSql Para conectarse con la BD
  *
- * @author brand
+ * @author Eliamill Brandt
+ * @version 1.1
  */
 public class GestionSql {
 
@@ -21,10 +23,18 @@ public class GestionSql {
 
     private static Connection conn;
 
+    /**
+     * Método de obtener Conexión
+     *
+     * @return
+     */
     public static Connection getConn() {
         return conn;
     }
 
+    /**
+     * Método para abrir la conexión
+     */
     public void openConnection() {
         if (conn == null) {
             try {
@@ -39,10 +49,20 @@ public class GestionSql {
 
     }
 
+    /**
+     * Método para cerrar la conexión
+     *
+     * @throws SQLException
+     */
     public void closeConnection() throws SQLException {
         conn.close();
     }
 
+    /**
+     * Método ejecutar sql
+     *
+     * @param nombreProcedimientoAlmacenado
+     */
     public void executeSql(String nombreProcedimientoAlmacenado) {
 
     }

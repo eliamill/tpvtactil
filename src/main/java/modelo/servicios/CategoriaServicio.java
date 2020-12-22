@@ -13,13 +13,23 @@ import modelo.dao.beans.Categoria;
 import modelo.dao.beans.enums.TipoGestion;
 
 /**
+ * Clase CategoriaServicio Para getionar servicios 
  *
- * @author brand
+ * @author Eliamill Brandt
+ * @version 1.1
  */
 public class CategoriaServicio {
 
     private CategoriaDao categoriaDao = new CategoriaDao();
 
+    /**
+     * Método gestionar categoria
+     *
+     * @param categoria
+     * @param tipoGestion
+     * @return
+     * @throws SQLException
+     */
     public List<Categoria> gestionarCategoria(Categoria categoria, TipoGestion tipoGestion) throws SQLException {
         List<Categoria> categorias = new ArrayList<>();
         switch (tipoGestion) {
@@ -44,10 +54,13 @@ public class CategoriaServicio {
         return categorias;
     }
 
-    public List<Categoria> getCategorias() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    /**
+     * Método obtener categotia por nombre
+     *
+     * @param nombre
+     * @return
+     * @throws SQLException
+     */
     public Categoria getCategoriaByNombre(String nombre) throws SQLException {
         return categoriaDao.getCategoriaByNombre(nombre);
     }

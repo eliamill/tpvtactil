@@ -19,8 +19,10 @@ import modelo.servicios.CategoriaServicio;
 import modelo.servicios.ProductoServicio;
 
 /**
+ * Clase ProductoVista
  *
- * @author brand
+ * @author Eliamill Brandt
+ * @version 1.1
  */
 public class ProductoVista extends javax.swing.JFrame {
 
@@ -29,7 +31,8 @@ public class ProductoVista extends javax.swing.JFrame {
     private int row = -1;
 
     /**
-     * Creates new form Producto
+     * Método que inicializa tabla para listar información en la misma Creates
+     * new form Producto
      */
     public ProductoVista() {
         initComponents();
@@ -210,6 +213,11 @@ public class ProductoVista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldProductoActionPerformed
 
+    /**
+     * Método que llama un evento en el boton mofificar
+     *
+     * @param evt
+     */
     private void jButtonModificarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarProductoActionPerformed
         if (row != -1 && jTextFieldProducto.getText() != null && jTextFieldProducto.getText().length() > 0
                 && jTextFieldIdCategoria.getText() != null && jTextFieldIdCategoria.getText().length() > 0) {
@@ -234,6 +242,11 @@ public class ProductoVista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonModificarProductoActionPerformed
 
+    /**
+     * Método que llama un evento en el boton insertar
+     *
+     * @param evt
+     */
     private void jButtonInsertarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertarProductoActionPerformed
         String nombreProducto = jTextFieldProducto.getText();
         if (jTextFieldProducto.getText() != null && jTextFieldProducto.getText().length() > 0
@@ -258,6 +271,11 @@ public class ProductoVista extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonInsertarProductoActionPerformed
 
+    /**
+     * Método que permite seleccionar componentes en tabla
+     *
+     * @param evt
+     */
     private void jTablePresentaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePresentaProductosMouseClicked
         JTable source = (JTable) evt.getSource();
         row = source.rowAtPoint(evt.getPoint());
@@ -275,6 +293,11 @@ public class ProductoVista extends javax.swing.JFrame {
         jTextFieldImagen.setText(nombreImagen);
     }//GEN-LAST:event_jTablePresentaProductosMouseClicked
 
+    /**
+     * Método que llama un evento en el boton borrar
+     *
+     * @param evt
+     */
     private void jButtonBorrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrarProductoActionPerformed
         if (row != -1) {
             try {
@@ -295,6 +318,8 @@ public class ProductoVista extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldImagenActionPerformed
 
     /**
+     * Método principalde la ventana independiente
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -346,6 +371,11 @@ public class ProductoVista extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldProducto;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Método obtener data para luego mostrar en tabla
+     *
+     * @param productos
+     */
     private void cargarProductosEnTabla(List<Producto> productos) {
         Object[][] data = new Object[(int) productos.size()][4];
 

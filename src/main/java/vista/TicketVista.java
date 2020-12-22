@@ -16,13 +16,18 @@ import modelo.gestionBd.GestionSql;
 import modelo.servicios.TicketServicio;
 
 /**
+ * Clase TicketVista
  *
- * @author brand
+ * @author Eliamill Brandt
+ * @version 1.1
  */
 public class TicketVista extends javax.swing.JFrame {
-private TicketServicio ticketServicio;
+
+    private TicketServicio ticketServicio;
+
     /**
-     * Creates new form ticket
+     * Método que inicializa informacion en tabla y la lista Creates new form
+     * ticket
      */
     public TicketVista() {
         initComponents();
@@ -30,13 +35,12 @@ private TicketServicio ticketServicio;
             GestionSql gestionSql = new GestionSql();
             gestionSql.openConnection();
             ticketServicio = new TicketServicio();
-            List<Ticket>tickets = ticketServicio.gestionarTicket(null, TipoGestion.LISTAR);
+            List<Ticket> tickets = ticketServicio.gestionarTicket(null, TipoGestion.LISTAR);
             cargarTicketsEnTabla(tickets);
         } catch (SQLException ex) {
             Logger.getLogger(CategoriaVista.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        
     }
 
     /**
@@ -114,6 +118,8 @@ private TicketServicio ticketServicio;
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * Método principal independiente de la ventana
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -156,8 +162,13 @@ private TicketServicio ticketServicio;
     private javax.swing.JTable jTablePresentaTickets;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Método que obtine data para mostar elementos en tabla
+     *
+     * @param tickets
+     */
     private void cargarTicketsEnTabla(List<Ticket> tickets) {
-     
+
         Object[][] data = new Object[(int) tickets.size()][3];
 
         for (int j = 0; j < tickets.size(); j++) {
@@ -165,20 +176,20 @@ private TicketServicio ticketServicio;
             for (int i = 0; i < 3; i++) {
                 if (i == 0) {
                     data[j][i] = ticket.getId();
-                } else if (i==1){
+                } else if (i == 1) {
                     data[j][i] = ticket.getIdCliente();
-                }else {
+                } else {
                     data[j][i] = ticket.getTotal();
                 }
             }
         }
 
-        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id ticket", "Id cliente","Total"}) {
+        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id ticket", "Id cliente", "Total"}) {
             @Override
             public Class getColumnClass(int column) {
                 return getValueAt(0, column).getClass();
             }
         };
-        jTablePresentaTickets.setModel(defaultTableModel);  
+        jTablePresentaTickets.setModel(defaultTableModel);
     }
 }
