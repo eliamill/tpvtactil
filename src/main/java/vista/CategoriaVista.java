@@ -262,9 +262,8 @@ public class CategoriaVista extends javax.swing.JFrame {
     }//GEN-LAST:event_jTablePresentaCategoriasFocusLost
 
     /**
-     * Método principal de la ventana individual
-     *
-     * @param args the command line arguments
+     * Método indepediente que pertenece a la venta categoria vista
+     * @param args 
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
