@@ -51,7 +51,6 @@ public class CategoriaVista extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jTextFieldNuevoNombreCategoria = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButtonModificar = new javax.swing.JButton();
@@ -63,8 +62,6 @@ public class CategoriaVista extends javax.swing.JFrame {
         jLabelcategoriaModificandose = new javax.swing.JLabel();
 
         setTitle("Gestion de Categorias");
-
-        jLabel1.setText("Fila modificandose");
 
         jLabel3.setText("Nombre de la Categoria");
 
@@ -126,8 +123,7 @@ public class CategoriaVista extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(178, 178, 178)
                                 .addComponent(jLabelcategoriaModificandose, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -159,9 +155,7 @@ public class CategoriaVista extends javax.swing.JFrame {
                     .addComponent(jButtonModificar)
                     .addComponent(jButtonBorrarCategoria))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabelcategoriaModificandose, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelcategoriaModificandose, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -286,7 +280,6 @@ public class CategoriaVista extends javax.swing.JFrame {
     private javax.swing.JButton jButtonBorrarCategoria;
     private javax.swing.JButton jButtonInsertar;
     private javax.swing.JButton jButtonModificar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelcategoriaModificandose;
