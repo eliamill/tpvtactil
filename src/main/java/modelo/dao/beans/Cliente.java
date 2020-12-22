@@ -13,6 +13,19 @@ public class Cliente {
     
     private int id;
     private String nombre;
+    private String dnicif;
+
+    public String getDnicif() {
+        return dnicif;
+    }
+
+    public void setDnicif(String dnicif) {
+        this.dnicif = dnicif;
+    }
+    
+    
+    
+    
 
     public int getId() {
         return id;
@@ -31,9 +44,7 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public Object getDni() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
     
     
     

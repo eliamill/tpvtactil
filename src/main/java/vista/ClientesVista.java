@@ -218,6 +218,8 @@ public class ClientesVista extends javax.swing.JFrame {
         row = source.rowAtPoint(evt.getPoint());
         String nombre = (String)  jTablePresentaClientes.getModel().getValueAt(row, 1);
         jTextFieldNombreCliente.setText(nombre);
+        String dnicif = (String)  jTablePresentaClientes.getModel().getValueAt(row, 2);
+        jTextFieldDni.setText(dnicif);
     }//GEN-LAST:event_jTablePresentaClientesMouseClicked
 
     private void jTextFieldNombreClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreClienteActionPerformed
@@ -276,20 +278,22 @@ public class ClientesVista extends javax.swing.JFrame {
     private void cargarClientesEnTabla(List<Cliente> clientes) {
 
       
-        Object[][] data = new Object[(int) clientes.size()][2];
+        Object[][] data = new Object[(int) clientes.size()][3];
 
         for (int j = 0; j < clientes.size(); j++) {
             Cliente cliente = clientes.get(j);
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 3; i++) {
                 if (i == 0) {
                     data[j][i] = cliente.getId();
-                } else {
+                }else if (i == 1) {
                     data[j][i] = cliente.getNombre();
+                }  else {
+                    data[j][i] = cliente.getDnicif();
                 }
             }
         }
 
-        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id", "Nombre"}) {
+        DefaultTableModel defaultTableModel = new DefaultTableModel(data, new String[]{"Id", "Nombre","DNICIF"}) {
             @Override
             public Class getColumnClass(int column) {
                 return getValueAt(0, column).getClass();

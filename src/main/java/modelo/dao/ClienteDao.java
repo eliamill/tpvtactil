@@ -88,6 +88,7 @@ public class ClienteDao {
             Cliente cliente = new Cliente();
             cliente.setId(resultSet.getInt("id"));
             cliente.setNombre(resultSet.getString("nombre"));
+            cliente.setDnicif(resultSet.getString("dnicif"));
             retorno.add(cliente);
         }
 
